@@ -1,0 +1,169 @@
+INFO 03-10 13:52:43 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=3.6078 high_k_occ=0.1000 hist=2:54,3:9,4:7
+INFO 03-10 13:52:43 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.6732] waste_ratio=0.1634
+INFO 03-10 13:52:44 [spec_decode_worker.py:1293] AdaptiveK utility switch: 2 -> 3 (cap=4)
+INFO 03-10 13:52:44 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=79.95 scoring_time_ms=123.67 verification_time_ms=14.42
+INFO 03-10 13:52:45 [spec_decode_worker.py:913] AdaptiveK update: k 3 -> 2 (waste=0.2810 pos2=0.6536 pos3=0.5033 pos4=0.5033 q=153 cap=4)
+INFO 03-10 13:52:45 [metrics.py:417] Avg prompt throughput: 1456.9 tokens/s, Avg generation throughput: 248.4 tokens/s, Running: 150 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 28.5%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:52:45 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.677, System efficiency: 0.702, Number of speculative tokens: 2, Number of accepted tokens: 2625, Number of draft tokens: 3880, Number of emitted tokens: 4083.
+INFO 03-10 13:52:48 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=5.0450 high_k_occ=0.0875 hist=2:63,3:10,4:7
+INFO 03-10 13:52:48 [spec_decode_worker.py:913] AdaptiveK update: k 2 -> 3 (waste=0.1162 pos2=0.7676 pos3=0.7676 pos4=0.7676 q=142 cap=4)
+INFO 03-10 13:52:50 [spec_decode_worker.py:1293] AdaptiveK utility switch: 3 -> 2 (cap=4)
+INFO 03-10 13:52:50 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=75.82 scoring_time_ms=135.69 verification_time_ms=17.36
+INFO 03-10 13:52:50 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 353.5 tokens/s, Running: 133 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 26.3%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:52:50 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.690, System efficiency: 0.698, Number of speculative tokens: 3, Number of accepted tokens: 5390, Number of draft tokens: 7807, Number of emitted tokens: 8177.
+INFO 03-10 13:52:52 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=6.3975 high_k_occ=0.0778 hist=2:70,3:13,4:7
+INFO 03-10 13:52:52 [spec_decode_worker.py:913] AdaptiveK update: k 2 -> 3 (waste=0.1098 pos2=0.7803 pos3=0.7803 pos4=0.7803 q=132 cap=4)
+INFO 03-10 13:52:54 [spec_decode_worker.py:1293] AdaptiveK utility switch: 3 -> 2 (cap=4)
+INFO 03-10 13:52:55 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=75.82 scoring_time_ms=107.06 verification_time_ms=11.32
+INFO 03-10 13:52:55 [spec_decode_worker.py:913] AdaptiveK update: k 2 -> 3 (waste=0.1179 pos2=0.7642 pos3=0.7642 pos4=0.7642 q=123 cap=4)
+INFO 03-10 13:52:55 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=8.3776 high_k_occ=0.0700 hist=2:74,3:19,4:7
+INFO 03-10 13:52:55 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 352.5 tokens/s, Running: 123 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 26.9%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:52:55 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.703, System efficiency: 0.692, Number of speculative tokens: 2, Number of accepted tokens: 8765, Number of draft tokens: 12472, Number of emitted tokens: 12951.
+INFO 03-10 13:52:59 [spec_decode_worker.py:1293] AdaptiveK utility switch: 3 -> 2 (cap=4)
+INFO 03-10 13:52:59 [spec_decode_worker.py:913] AdaptiveK update: k 2 -> 3 (waste=0.1239 pos2=0.7521 pos3=0.7521 pos4=0.7521 q=117 cap=4)
+INFO 03-10 13:53:00 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=9.3565 high_k_occ=0.0636 hist=2:75,3:28,4:7
+INFO 03-10 13:53:01 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=73.25 scoring_time_ms=122.23 verification_time_ms=16.03
+INFO 03-10 13:53:01 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 263.7 tokens/s, Running: 112 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 28.0%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:01 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.717, System efficiency: 0.684, Number of speculative tokens: 3, Number of accepted tokens: 12030, Number of draft tokens: 16786, Number of emitted tokens: 17224.
+INFO 03-10 13:53:04 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.773, 0.6402] waste_ratio=0.1956
+INFO 03-10 13:53:04 [spec_decode_worker.py:1293] AdaptiveK utility switch: 3 -> 2 (cap=4)
+INFO 03-10 13:53:04 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=9.6105 high_k_occ=0.0583 hist=2:76,3:37,4:7
+INFO 03-10 13:53:04 [spec_decode_worker.py:913] AdaptiveK update: k 2 -> 3 (waste=0.0905 pos2=0.8190 pos3=0.8190 pos4=0.8190 q=105 cap=4)
+INFO 03-10 13:53:06 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 275.6 tokens/s, Running: 101 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 27.4%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:06 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=67.84 scoring_time_ms=116.41 verification_time_ms=15.03
+INFO 03-10 13:53:08 [spec_decode_worker.py:913] AdaptiveK update: k 3 -> 4 (waste=0.1481 pos2=0.8384 pos3=0.7172 pos4=0.7172 q=99 cap=4)
+INFO 03-10 13:53:08 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=10.5327 high_k_occ=0.0615 hist=2:76,3:46,4:8
+INFO 03-10 13:53:09 [spec_decode_worker.py:1293] AdaptiveK utility switch: 4 -> 2 (cap=4)
+INFO 03-10 13:53:10 [spec_decode_worker.py:913] AdaptiveK update: k 2 -> 3 (waste=0.0843 pos2=0.8315 pos3=0.8315 pos4=0.8315 q=89 cap=4)
+INFO 03-10 13:53:11 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 263.3 tokens/s, Running: 88 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 26.1%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:11 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.732, System efficiency: 0.683, Number of speculative tokens: 3, Number of accepted tokens: 15519, Number of draft tokens: 21196, Number of emitted tokens: 21703.
+INFO 03-10 13:53:11 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=11.4045 high_k_occ=0.0643 hist=2:82,3:49,4:9
+INFO 03-10 13:53:12 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=69.85 scoring_time_ms=110.76 verification_time_ms=12.22
+INFO 03-10 13:53:13 [spec_decode_worker.py:1293] AdaptiveK utility switch: 3 -> 2 (cap=4)
+INFO 03-10 13:53:13 [spec_decode_worker.py:913] AdaptiveK update: k 2 -> 3 (waste=0.1026 pos2=0.7949 pos3=0.7949 pos4=0.7949 q=78 cap=4)
+INFO 03-10 13:53:15 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=12.1700 high_k_occ=0.0600 hist=2:84,3:57,4:9
+INFO 03-10 13:53:16 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 207.3 tokens/s, Running: 71 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 24.5%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:16 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.745, System efficiency: 0.689, Number of speculative tokens: 3, Number of accepted tokens: 18710, Number of draft tokens: 25101, Number of emitted tokens: 25939.
+INFO 03-10 13:53:17 [spec_decode_worker.py:913] AdaptiveK update: k 3 -> 4 (waste=0.1275 pos2=0.8824 pos3=0.7353 pos4=0.7353 q=68 cap=4)
+INFO 03-10 13:53:17 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.8271, 0.7055] waste_ratio=0.1558
+INFO 03-10 13:53:17 [spec_decode_worker.py:1293] AdaptiveK utility switch: 4 -> 2 (cap=4)
+INFO 03-10 13:53:17 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=64.26 scoring_time_ms=107.24 verification_time_ms=12.18
+INFO 03-10 13:53:18 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=12.9650 high_k_occ=0.0563 hist=2:89,3:62,4:9
+INFO 03-10 13:53:19 [spec_decode_worker.py:913] AdaptiveK update: k 2 -> 3 (waste=0.1094 pos2=0.7812 pos3=0.7812 pos4=0.7812 q=64 cap=4)
+INFO 03-10 13:53:21 [spec_decode_worker.py:1293] AdaptiveK utility switch: 3 -> 2 (cap=4)
+INFO 03-10 13:53:21 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=13.7481 high_k_occ=0.0529 hist=2:95,3:66,4:9
+INFO 03-10 13:53:21 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 220.8 tokens/s, Running: 62 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 23.8%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:21 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.754, System efficiency: 0.691, Number of speculative tokens: 3, Number of accepted tokens: 21432, Number of draft tokens: 28429, Number of emitted tokens: 29484.
+INFO 03-10 13:53:23 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=63.58 scoring_time_ms=91.45 verification_time_ms=7.33
+INFO 03-10 13:53:23 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.8498] waste_ratio=0.0751
+INFO 03-10 13:53:24 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=13.4192 high_k_occ=0.0500 hist=2:105,3:66,4:9
+INFO 03-10 13:53:26 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.8573] waste_ratio=0.0714
+INFO 03-10 13:53:26 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=13.1006 high_k_occ=0.0474 hist=2:115,3:66,4:9
+INFO 03-10 13:53:26 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 226.3 tokens/s, Running: 53 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 22.2%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:26 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.761, System efficiency: 0.702, Number of speculative tokens: 2, Number of accepted tokens: 23727, Number of draft tokens: 31198, Number of emitted tokens: 32831.
+INFO 03-10 13:53:28 [spec_decode_worker.py:1293] AdaptiveK utility switch: 2 -> 3 (cap=4)
+INFO 03-10 13:53:28 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=86.08 scoring_time_ms=115.11 verification_time_ms=7.92
+INFO 03-10 13:53:30 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8380 accept_with_hs=0.0000 accept_no_hs=0.8380 throughput_tps=253.283 iter_p95=388.336
+INFO 03-10 13:53:30 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=13.2270 high_k_occ=0.0450 hist=2:119,3:72,4:9
+INFO 03-10 13:53:32 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 134.0 tokens/s, Running: 44 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 20.0%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:32 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.766, System efficiency: 0.712, Number of speculative tokens: 2, Number of accepted tokens: 25636, Number of draft tokens: 33466, Number of emitted tokens: 35763.
+INFO 03-10 13:53:32 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.8187, 0.6887] waste_ratio=0.1642
+INFO 03-10 13:53:33 [spec_decode_worker.py:1293] AdaptiveK utility switch: 3 -> 2 (cap=4)
+INFO 03-10 13:53:33 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=13.3389 high_k_occ=0.0429 hist=2:123,3:78,4:9
+INFO 03-10 13:53:33 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=81.67 scoring_time_ms=109.96 verification_time_ms=7.65
+INFO 03-10 13:53:36 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.8157] waste_ratio=0.0922
+INFO 03-10 13:53:36 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=13.0139 high_k_occ=0.0409 hist=2:133,3:78,4:9
+INFO 03-10 13:53:37 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 127.7 tokens/s, Running: 34 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 16.1%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:37 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.768, System efficiency: 0.712, Number of speculative tokens: 2, Number of accepted tokens: 27173, Number of draft tokens: 35375, Number of emitted tokens: 37800.
+INFO 03-10 13:53:38 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7983] waste_ratio=0.1008
+INFO 03-10 13:53:39 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=79.50 scoring_time_ms=104.02 verification_time_ms=11.62
+INFO 03-10 13:53:39 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=12.7248 high_k_occ=0.0391 hist=2:143,3:78,4:9
+INFO 03-10 13:53:41 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7898] waste_ratio=0.1051
+INFO 03-10 13:53:42 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=12.4435 high_k_occ=0.0375 hist=2:153,3:78,4:9
+INFO 03-10 13:53:42 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 112.8 tokens/s, Running: 30 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 14.5%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:42 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.769, System efficiency: 0.716, Number of speculative tokens: 2, Number of accepted tokens: 28240, Number of draft tokens: 36723, Number of emitted tokens: 39451.
+INFO 03-10 13:53:44 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7967] waste_ratio=0.1016
+INFO 03-10 13:53:44 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=78.56 scoring_time_ms=74.88 verification_time_ms=5.68
+INFO 03-10 13:53:44 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=12.1990 high_k_occ=0.0360 hist=2:163,3:78,4:9
+INFO 03-10 13:53:46 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7823] waste_ratio=0.1089
+INFO 03-10 13:53:47 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=11.9598 high_k_occ=0.0346 hist=2:173,3:78,4:9
+INFO 03-10 13:53:47 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 106.4 tokens/s, Running: 23 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 12.7%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:47 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.769, System efficiency: 0.719, Number of speculative tokens: 2, Number of accepted tokens: 29152, Number of draft tokens: 37903, Number of emitted tokens: 40897.
+INFO 03-10 13:53:49 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.784] waste_ratio=0.1080
+INFO 03-10 13:53:50 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=11.7256 high_k_occ=0.0333 hist=2:183,3:78,4:9
+INFO 03-10 13:53:50 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=76.29 scoring_time_ms=98.75 verification_time_ms=6.70
+INFO 03-10 13:53:51 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7844] waste_ratio=0.1078
+INFO 03-10 13:53:52 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=11.5081 high_k_occ=0.0321 hist=2:193,3:78,4:9
+INFO 03-10 13:53:52 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 86.1 tokens/s, Running: 21 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 12.2%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:52 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.769, System efficiency: 0.721, Number of speculative tokens: 2, Number of accepted tokens: 29933, Number of draft tokens: 38929, Number of emitted tokens: 42119.
+INFO 03-10 13:53:54 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7811] waste_ratio=0.1094
+INFO 03-10 13:53:55 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=11.3067 high_k_occ=0.0310 hist=2:203,3:78,4:9
+INFO 03-10 13:53:55 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=73.39 scoring_time_ms=94.75 verification_time_ms=6.00
+INFO 03-10 13:53:56 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7833] waste_ratio=0.1084
+INFO 03-10 13:53:57 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=11.0996 high_k_occ=0.0300 hist=2:213,3:78,4:9
+INFO 03-10 13:53:57 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 67.5 tokens/s, Running: 13 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 7.3%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:53:57 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.769, System efficiency: 0.723, Number of speculative tokens: 2, Number of accepted tokens: 30624, Number of draft tokens: 39813, Number of emitted tokens: 43203.
+INFO 03-10 13:53:59 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7819] waste_ratio=0.1090
+INFO 03-10 13:54:00 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=10.9112 high_k_occ=0.0290 hist=2:223,3:78,4:9
+INFO 03-10 13:54:00 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=70.45 scoring_time_ms=88.14 verification_time_ms=5.51
+INFO 03-10 13:54:01 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.776] waste_ratio=0.1120
+INFO 03-10 13:54:02 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=10.7414 high_k_occ=0.0281 hist=2:233,3:78,4:9
+INFO 03-10 13:54:02 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 37.1 tokens/s, Running: 5 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 3.3%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:54:02 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.769, System efficiency: 0.725, Number of speculative tokens: 2, Number of accepted tokens: 31062, Number of draft tokens: 40375, Number of emitted tokens: 43881.
+INFO 03-10 13:54:03 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7666] waste_ratio=0.1167
+INFO 03-10 13:54:04 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=10.5862 high_k_occ=0.0273 hist=2:243,3:78,4:9
+INFO 03-10 13:54:05 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7576] waste_ratio=0.1212
+INFO 03-10 13:54:06 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=50.72 scoring_time_ms=55.36 verification_time_ms=4.99
+INFO 03-10 13:54:06 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=10.4481 high_k_occ=0.0265 hist=2:253,3:78,4:9
+INFO 03-10 13:54:07 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7464] waste_ratio=0.1268
+INFO 03-10 13:54:07 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=10.3382 high_k_occ=0.0257 hist=2:263,3:78,4:9
+INFO 03-10 13:54:07 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 22.0 tokens/s, Running: 4 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 2.7%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:54:07 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.769, System efficiency: 0.724, Number of speculative tokens: 2, Number of accepted tokens: 31219, Number of draft tokens: 40615, Number of emitted tokens: 44131.
+INFO 03-10 13:54:09 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7449] waste_ratio=0.1275
+INFO 03-10 13:54:09 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=10.2194 high_k_occ=0.0250 hist=2:273,3:78,4:9
+INFO 03-10 13:54:10 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7406] waste_ratio=0.1297
+INFO 03-10 13:54:11 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=10.0999 high_k_occ=0.0243 hist=2:283,3:78,4:9
+INFO 03-10 13:54:11 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=45.49 scoring_time_ms=55.26 verification_time_ms=4.93
+INFO 03-10 13:54:12 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7411] waste_ratio=0.1294
+INFO 03-10 13:54:13 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 22.6 tokens/s, Running: 4 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 2.9%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:54:13 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.768, System efficiency: 0.724, Number of speculative tokens: 2, Number of accepted tokens: 31393, Number of draft tokens: 40863, Number of emitted tokens: 44403.
+INFO 03-10 13:54:13 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=9.9873 high_k_occ=0.0237 hist=2:293,3:78,4:9
+INFO 03-10 13:54:14 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7416] waste_ratio=0.1292
+INFO 03-10 13:54:15 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=9.8753 high_k_occ=0.0231 hist=2:303,3:78,4:9
+INFO 03-10 13:54:16 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7412] waste_ratio=0.1294
+INFO 03-10 13:54:16 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8452 accept_with_hs=0.0000 accept_no_hs=0.8452 throughput_tps=217.485 iter_p95=379.844
+INFO 03-10 13:54:16 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=9.7663 high_k_occ=0.0225 hist=2:313,3:78,4:9
+INFO 03-10 13:54:16 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=65.89 scoring_time_ms=53.67 verification_time_ms=5.06
+INFO 03-10 13:54:18 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7358] waste_ratio=0.1321
+INFO 03-10 13:54:18 [metrics.py:417] Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.9 tokens/s, Running: 3 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 1.9%, CPU KV cache usage: 0.0%.
+INFO 03-10 13:54:18 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.768, System efficiency: 0.724, Number of speculative tokens: 2, Number of accepted tokens: 31551, Number of draft tokens: 41095, Number of emitted tokens: 44660.
+INFO 03-10 13:54:18 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=9.6502 high_k_occ=0.0220 hist=2:323,3:78,4:9
+INFO 03-10 13:54:19 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7357] waste_ratio=0.1322
+INFO 03-10 13:54:20 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=9.5423 high_k_occ=0.0214 hist=2:333,3:78,4:9
+INFO 03-10 13:54:21 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.734] waste_ratio=0.1330
+INFO 03-10 13:54:21 [spec_decode_worker.py:783] AdaptiveK stats switch_per_min=9.4570 high_k_occ=0.0209 hist=2:343,3:78,4:9
+INFO 03-10 13:54:21 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=40.85 scoring_time_ms=54.68 verification_time_ms=3.43
+INFO 03-10 13:54:23 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7282] waste_ratio=0.1359
+
+
+============ Serving Benchmark Result ============
+Successful requests:                     200       
+Benchmark duration (s):                  114.13    
+Total input tokens:                      43560     
+Total generated tokens:                  44697     
+Request throughput (req/s):              1.75      
+Output token throughput (tok/s):         391.62    
+Total Token throughput (tok/s):          773.27    
+---------------Time to First Token----------------
+Mean TTFT (ms):                          245.80    
+Median TTFT (ms):                        233.29    
+P99 TTFT (ms):                           474.38    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          251.92    
+Median TPOT (ms):                        200.11    
+P99 TPOT (ms):                           645.16    
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           407.82    
+Median ITL (ms):                         348.84    
+P99 ITL (ms):                            1736.24   
+==================================================

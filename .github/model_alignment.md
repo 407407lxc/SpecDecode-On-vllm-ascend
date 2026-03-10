@@ -442,3 +442,99 @@ bash scripts/model_alignment_bench_v2.sh
 - 任一异常（shape 不匹配、adapter 载入失败、性能退化超阈值），  
   立即置 `VLLM_ASCEND_DRAFT_HS_ENABLE=0` 回到无 HS 消费路径。  
 - 保持新逻辑“可拔插、可禁用、可单点回滚”。
+
+---
+
+## 18. adaptive-k 全量数据整合（来自 `github/Data/adaptive-k`）
+
+### 18.1 数据完整性与口径检查
+
+- 报告文件数：11（fixed/adaptive/adaptive_pro 全部读取）
+- Successful requests 全部为 200：是
+- Total input tokens 全部为 43560：是
+- Total generated tokens 观测到的取值：44524, 44636, 44697
+- 说明：spec0 是 no-spec 基线，输出 token 与 spec 组不必严格一致；spec8-fixed 记录为 44636，其余 spec 组多为 44697。
+
+### 18.2 全量主指标总表（11 组）
+
+| Case | mode | k | Duration(s) | Output tok/s | Total tok/s | Mean TTFT | Mean TPOT | Mean ITL | P99 ITL | Draft acceptance | System efficiency | Adaptive updates | Tail final k |
+| ---- | ---- | -: | ----------: | -----------: | ----------: | --------: | --------: | -------: | ------: | ---------------: | ----------------: | ---------------: | -----------: |
+| spec0-fixed | fixed | 0 | 63.21 | 704.33 | 1393.41 | 237.24 | 149.94 | 94.63 | 492.31 | - | - | 0 | - |
+| spec2-fixed | fixed | 2 | 107.77 | 414.74 | 818.92 | 254.25 | 253.54 | 357.89 | 1549.36 | 0.776 | 0.804 | 0 | 2 |
+| spec2-adaptive | adaptive | 2 | 118.57 | 376.97 | 744.35 | 270.51 | 304.55 | 451.97 | 2095.75 | 0.762 | 0.681 | 8 | 2 |
+| spec2-adaptive_pro | adaptive_pro | 2 | 117.22 | 381.31 | 752.91 | 296.92 | 303.35 | 414.15 | 2637.54 | 0.776 | 0.744 | 11 | 2 |
+| spec4-fixed | fixed | 4 | 138.66 | 322.34 | 636.48 | 321.05 | 298.63 | 575.14 | 2777.87 | 0.747 | 0.648 | 0 | 4 |
+| spec4-adaptive | adaptive | 4 | 117.86 | 379.23 | 748.82 | 278.48 | 273.95 | 447.46 | 2075.64 | 0.762 | 0.673 | 8 | 2 |
+| spec4-adaptive_pro | adaptive_pro | 4 | 114.95 | 388.84 | 767.78 | 291.64 | 238.65 | 392.81 | 1945.47 | 0.765 | 0.720 | 11 | 2 |
+| spec8-fixed | fixed | 8 | 192.27 | 232.16 | 458.71 | 567.15 | 479.52 | 979.48 | 5562.85 | 0.717 | 0.446 | 0 | 8 |
+| spec8-adaptive | adaptive | 8 | 117.86 | 379.22 | 748.80 | 243.64 | 249.91 | 442.43 | 1788.54 | 0.763 | 0.672 | 12 | 2 |
+| spec8-adaptive_pro | adaptive_pro | 8 | 121.75 | 367.12 | 724.89 | 449.82 | 372.54 | 521.19 | 4398.90 | 0.739 | 0.579 | 11 | 2 |
+| spec5-fixed | fixed | 5 | 153.46 | 291.26 | 575.12 | 539.43 | 300.49 | 640.03 | 2450.38 | 0.737 | 0.588 | 0 | - |
+
+### 18.3 同一 k 的胜负结论（fixed vs adaptive vs adaptive_pro）
+
+| k | 吞吐最优(Output tok/s) | TTFT 最优 | TPOT 最优 | ITL 最优 | 质量最优(accept/eff) | 结论 |
+| -: | --------------------- | --------- | --------- | -------- | -------------------- | ---- |
+| 2 | fixed (414.74) | fixed (254.25) | fixed (253.54) | fixed (357.89) | fixed (0.776/0.804) | k=2 下 fixed 仍是性能上限，adaptive_pro 仅在 eff 上更接近最优。 |
+| 4 | adaptive_pro (388.84) | adaptive (278.48) | adaptive_pro (238.65) | adaptive_pro (392.81) | adaptive_pro (0.765/0.720) | k=4 下 adaptive_pro 吞吐与 TPOT/ITL 最优，是当前最推荐工作点。 |
+| 8 | adaptive (379.22) | adaptive (243.64) | adaptive (249.91) | adaptive (442.43) | adaptive (0.763/0.672) | k=8 下 adaptive 明显优于 fixed；adaptive_pro 出现退化。 |
+
+### 18.4 三类增益百分比（核心对比）
+
+A) `adaptive` 相对 `fixed`（同 k）
+
+| k | Output tok/s Δ | Mean TTFT Δ | Mean TPOT Δ | Mean ITL Δ | P99 ITL Δ | acceptance Δ(pp) | efficiency Δ(pp) |
+| -: | -------------: | ----------: | ----------: | ---------: | --------: | ----------------: | ----------------: |
+| 2 | -9.11% | 6.40% | 20.12% | 26.29% | 35.27% | -1.40 | -12.30 |
+| 4 | 17.65% | -13.26% | -8.26% | -22.20% | -25.28% | 1.50 | 2.50 |
+| 8 | 63.34% | -57.04% | -47.88% | -54.83% | -67.85% | 4.60 | 22.60 |
+
+B) `adaptive_pro` 相对 `adaptive`（同 k）
+
+| k | Output tok/s Δ | Mean TTFT Δ | Mean TPOT Δ | Mean ITL Δ | P99 ITL Δ | acceptance Δ(pp) | efficiency Δ(pp) |
+| -: | -------------: | ----------: | ----------: | ---------: | --------: | ----------------: | ----------------: |
+| 2 | 1.15% | 9.76% | -0.39% | -8.37% | 25.85% | 1.40 | 6.30 |
+| 4 | 2.53% | 4.73% | -12.89% | -12.21% | -6.27% | 0.30 | 4.70 |
+| 8 | -3.19% | 84.62% | 49.07% | 17.80% | 145.95% | -2.40 | -9.30 |
+
+C) `adaptive_pro` 相对 `fixed`（同 k）
+
+| k | Output tok/s Δ | Mean TTFT Δ | Mean TPOT Δ | Mean ITL Δ | P99 ITL Δ | acceptance Δ(pp) | efficiency Δ(pp) |
+| -: | -------------: | ----------: | ----------: | ---------: | --------: | ----------------: | ----------------: |
+| 2 | -8.06% | 16.78% | 19.65% | 15.72% | 70.23% | 0.00 | -6.00 |
+| 4 | 20.63% | -9.16% | -20.09% | -31.70% | -29.97% | 1.80 | 7.20 |
+| 8 | 58.13% | -20.69% | -22.31% | -46.79% | -20.92% | 2.20 | 13.30 |
+
+### 18.5 相对 spec0 基线差值（用于论文总对照）
+
+| Case | Output tok/s Δ | Mean TTFT Δ | Mean TPOT Δ | Mean ITL Δ |
+| ---- | -------------: | ----------: | ----------: | ---------: |
+| spec2-adaptive | -46.48% | 14.02% | 103.11% | 377.62% |
+| spec2-adaptive_pro | -45.86% | 25.16% | 102.31% | 337.65% |
+| spec2-fixed | -41.12% | 7.17% | 69.09% | 278.20% |
+| spec4-adaptive | -46.16% | 17.38% | 82.71% | 372.85% |
+| spec4-adaptive_pro | -44.79% | 22.93% | 59.16% | 315.10% |
+| spec4-fixed | -54.23% | 35.33% | 99.17% | 507.78% |
+| spec5-fixed | -58.65% | 127.38% | 100.41% | 576.35% |
+| spec8-adaptive | -46.16% | 2.70% | 66.67% | 367.54% |
+| spec8-adaptive_pro | -47.88% | 89.61% | 148.46% | 450.77% |
+| spec8-fixed | -67.04% | 139.06% | 219.81% | 935.06% |
+
+### 18.6 动态行为统计（adaptive 与 adaptive_pro）
+
+| Case | mode | base k | Adaptive updates | Tail final k | Tail final waste_ratio | Tail step_accept |
+| ---- | ---- | -----: | ---------------: | -----------: | ---------------------: | ---------------- |
+| spec2-adaptive | adaptive | 2 | 8 | 2 | 0.1291 | [1.0, 0.7418] |
+| spec2-adaptive_pro | adaptive_pro | 2 | 11 | 2 | 0.1161 | [1.0, 0.7679] |
+| spec4-adaptive | adaptive | 4 | 8 | 2 | 0.1380 | [1.0, 0.7239] |
+| spec4-adaptive_pro | adaptive_pro | 4 | 11 | 2 | 0.1351 | [1.0, 0.7298] |
+| spec8-adaptive | adaptive | 8 | 12 | 2 | 0.1565 | [1.0, 0.6869] |
+| spec8-adaptive_pro | adaptive_pro | 8 | 11 | 2 | 0.1314 | [1.0, 0.7373] |
+
+- 观测到的共性：6 组动态实验在尾段全部回落到 `k=2`。
+- 风险提示：`spec8-adaptive_pro` 出现明显退化（TTFT/TPOT/ITL 均恶化），应在策略里限制高 k 触发条件。
+
+结论：
+1. 在当前数据下，`k=4 + adaptive_pro` 是 speculative 组综合最优点（吞吐最高，TPOT/ITL 较优）。
+2. `k=2` 区间 fixed 仍有优势，说明动态控制在低 k 负载下还有开销。
+3. `k=8` 区间 adaptive_pro 不稳定，建议先将 `k_max` 收敛到 `4` 再迭代高 k 门控。

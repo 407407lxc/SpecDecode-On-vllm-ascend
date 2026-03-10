@@ -25,6 +25,9 @@ FIXED_K_LIST_STR="${FIXED_K_LIST_STR:-2,4,8}"
 # A2 calibration params
 A2_ALIGN_SCALE="${A2_ALIGN_SCALE:-1.0}"
 A2_ALIGN_BIAS="${A2_ALIGN_BIAS:-0.0}"
+A2_ALIGN_MODE="${A2_ALIGN_MODE:-${VLLM_ASCEND_DRAFT_ALIGN_MODE:-temperature}}"
+A2_ALIGN_TEMPERATURE="${A2_ALIGN_TEMPERATURE:-${VLLM_ASCEND_DRAFT_ALIGN_TEMPERATURE:-1.0}}"
+A2_ALIGN_VOCAB_BIAS_PATH="${A2_ALIGN_VOCAB_BIAS_PATH:-${VLLM_ASCEND_DRAFT_ALIGN_VOCAB_BIAS_PATH:-}}"
 
 # P1/P2 log interval
 ALIGN_LOG_INTERVAL="${ALIGN_LOG_INTERVAL:-10}"
@@ -37,6 +40,10 @@ BENCH_TIMEOUT_S="${BENCH_TIMEOUT_S:-0}"
 # Optional extra args
 SERVE_EXTRA_ARGS="${SERVE_EXTRA_ARGS:-}"
 BENCH_EXTRA_ARGS="${BENCH_EXTRA_ARGS:-}"
+# Log file mode: full (legacy) | two (only server.log + bench.log)
+LOG_FILE_MODE="${LOG_FILE_MODE:-full}"
+# When LOG_FILE_MODE=two: 0=truncate logs, 1=append to existing logs.
+LOG_FILE_APPEND="${LOG_FILE_APPEND:-0}"
 
 ########################
 # 2) Environment
@@ -48,8 +55,27 @@ unset CUDA_VISIBLE_DEVICES || true
 
 LOG_DIR="${LOG_DIR:-./logs/model_alignment_$(date +%Y%m%d_%H%M%S)}"
 mkdir -p "$LOG_DIR"
-SUMMARY_CSV="${LOG_DIR}/summary.csv"
-FAILED_TXT="${LOG_DIR}/failed_cases.txt"
+
+if [[ "$LOG_FILE_MODE" != "full" && "$LOG_FILE_MODE" != "two" ]]; then
+  echo "[ERROR] unsupported LOG_FILE_MODE=$LOG_FILE_MODE (use full|two)" >&2
+  exit 1
+fi
+
+if [[ "$LOG_FILE_MODE" == "two" ]]; then
+  SERVER_LOG_FILE="${LOG_DIR}/server.log"
+  BENCH_LOG_FILE="${LOG_DIR}/bench.log"
+  if [[ "$LOG_FILE_APPEND" == "1" ]]; then
+    touch "$SERVER_LOG_FILE" "$BENCH_LOG_FILE"
+  else
+    : >"$SERVER_LOG_FILE"
+    : >"$BENCH_LOG_FILE"
+  fi
+  SUMMARY_CSV=""
+  FAILED_TXT=""
+else
+  SUMMARY_CSV="${LOG_DIR}/summary.csv"
+  FAILED_TXT="${LOG_DIR}/failed_cases.txt"
+fi
 
 CURRENT_PID=""
 CURRENT_PGID=""
@@ -116,7 +142,7 @@ print_case_table() {
   echo "================ CASES ================"
   local n=${#CASE_TAGS[@]}
   for ((i = 0; i < n; i++)); do
-    echo "[$i] tag=${CASE_TAGS[$i]} baseline=${CASE_BASELINES[$i]} k=${CASE_KS[$i]} force_hs=${CASE_FORCE_HS[$i]} align=${CASE_ALIGN_ENABLE[$i]} scale=${CASE_ALIGN_SCALE[$i]} bias=${CASE_ALIGN_BIAS[$i]}"
+    echo "[$i] tag=${CASE_TAGS[$i]} baseline=${CASE_BASELINES[$i]} k=${CASE_KS[$i]} force_hs=${CASE_FORCE_HS[$i]} align=${CASE_ALIGN_ENABLE[$i]} mode=${A2_ALIGN_MODE} temp=${A2_ALIGN_TEMPERATURE} scale=${CASE_ALIGN_SCALE[$i]} bias=${CASE_ALIGN_BIAS[$i]} vocab_bias=${A2_ALIGN_VOCAB_BIAS_PATH}"
   done
   echo "======================================="
 }
@@ -233,17 +259,26 @@ extract_to_summary_csv() {
   local align_enable="$5"
   local align_scale="$6"
   local align_bias="$7"
-  local bench_log="$8"
-  local server_log="$9"
+  local align_mode="$8"
+  local align_temperature="$9"
+  local align_vocab_bias_path="${10}"
+  local adaptive_k_enable="${11}"
+  local adaptive_enable_utility="${12}"
+  local adaptive_align_gate_enable="${13}"
+  local bench_log="${14}"
+  local server_log="${15}"
 
-  python - "$SUMMARY_CSV" "$tag" "$baseline" "$serve_k" "$force_hs" "$align_enable" "$align_scale" "$align_bias" "$bench_log" "$server_log" <<'PY'
+  python - "$SUMMARY_CSV" "$tag" "$baseline" "$serve_k" "$force_hs" "$align_enable" "$align_scale" "$align_bias" "$align_mode" "$align_temperature" "$align_vocab_bias_path" "$adaptive_k_enable" "$adaptive_enable_utility" "$adaptive_align_gate_enable" "$bench_log" "$server_log" <<'PY'
 import csv
 import os
 import re
 import sys
 
 (summary_csv, tag, baseline, serve_k, force_hs, align_enable, align_scale,
- align_bias, bench_log, server_log) = sys.argv[1:]
+ align_bias, align_mode, align_temperature, align_vocab_bias_path,
+ adaptive_k_enable, adaptive_enable_utility, adaptive_align_gate_enable,
+ bench_log, server_log) = sys.argv[1:]
+
 
 def read_text(path):
     try:
@@ -252,17 +287,22 @@ def read_text(path):
     except FileNotFoundError:
         return ""
 
+
 bench = read_text(bench_log)
 serv = read_text(server_log)
 
+
 def find_num_from_table_or_text(text, label):
-    m = re.search(rf"\|\s*{re.escape(label)}\s*\|\s*([0-9]+(?:\.[0-9]+)?)\s*\|", text, re.I)
+    m = re.search(rf"\|\s*{re.escape(label)}\s*\|\s*([0-9]+(?:\.[0-9]+)?)\s*\|",
+                  text, re.I)
     if m:
         return m.group(1)
-    m = re.search(rf"{re.escape(label)}\s*[:=]\s*([0-9]+(?:\.[0-9]+)?)", text, re.I)
+    m = re.search(rf"{re.escape(label)}\s*[:=]\s*([0-9]+(?:\.[0-9]+)?)",
+                  text, re.I)
     if m:
         return m.group(1)
     return ""
+
 
 successful_requests = find_num_from_table_or_text(bench, "Successful requests")
 duration_s = find_num_from_table_or_text(bench, "Benchmark duration (s)")
@@ -277,7 +317,7 @@ p99_itl_ms = find_num_from_table_or_text(bench, "P99 ITL (ms)")
 
 spec_matches = re.findall(
     r"Draft acceptance rate:\s*([0-9.]+),\s*System efficiency:\s*([0-9.]+)",
-    serv
+    serv,
 )
 if spec_matches:
     draft_acceptance_rate, system_efficiency = spec_matches[-1]
@@ -293,24 +333,69 @@ if align_matches:
 else:
     hs_ratio, align_accept, align_accept_with_hs, align_accept_no_hs, align_tps, align_p95_ms = ("", "", "", "", "", "")
 
+align_cfg_matches = re.findall(
+    r"DRAFT_ALIGN config:\s*enable=([^\s]+)\s+mode=([^\s]+)\s+temperature=([0-9.]+)\s+scale=([-0-9.]+)\s+bias=([-0-9.]+)\s+vocab_bias_path=([^\s]+)\s+supports_previous_hidden_states=([^\s]+)",
+    serv,
+)
+if align_cfg_matches:
+    (runner_align_enable, runner_align_mode, runner_align_temperature,
+     runner_align_scale, runner_align_bias, runner_vocab_bias_path,
+     supports_previous_hidden_states) = align_cfg_matches[-1]
+else:
+    runner_align_enable = align_enable
+    runner_align_mode = align_mode
+    runner_align_temperature = align_temperature
+    runner_align_scale = align_scale
+    runner_align_bias = align_bias
+    runner_vocab_bias_path = align_vocab_bias_path or ""
+    supports_previous_hidden_states = ""
+
+adaptive_stats_matches = re.findall(
+    r"AdaptiveK stats switch_per_min=([0-9.]+)\s+high_k_occ=([0-9.]+)\s+hist=([^\s]+)",
+    serv,
+)
+if adaptive_stats_matches:
+    adaptive_switch_per_min, adaptive_high_k_occ, adaptive_hist = adaptive_stats_matches[-1]
+else:
+    adaptive_switch_per_min, adaptive_high_k_occ, adaptive_hist = "", "", ""
+
+adaptive_gate_matches = re.findall(
+    r"AdaptiveK align_gate score=([0-9.]+)\s+delta_hs=([-0-9.]+)\s+cap=([^\s]+)",
+    serv,
+)
+if adaptive_gate_matches:
+    adaptive_align_score, adaptive_delta_hs, adaptive_align_cap = adaptive_gate_matches[-1]
+else:
+    adaptive_align_score, adaptive_delta_hs, adaptive_align_cap = "", "", ""
+
 header = [
-    "tag", "baseline", "serve_k", "force_hs", "align_enable", "align_scale", "align_bias",
+    "tag", "baseline", "serve_k", "force_hs",
+    "align_enable", "align_mode", "align_temperature", "align_scale", "align_bias", "align_vocab_bias_path",
+    "adaptive_k_enable", "adaptive_enable_utility", "adaptive_align_gate_enable",
     "successful_requests", "duration_s",
     "output_tok_s", "total_tok_s",
     "mean_ttft_ms", "mean_tpot_ms", "mean_itl_ms",
     "p99_ttft_ms", "p99_tpot_ms", "p99_itl_ms",
     "draft_acceptance_rate", "system_efficiency",
     "align_hs_ratio", "align_accept", "align_accept_with_hs", "align_accept_no_hs", "align_tps", "align_p95_ms",
+    "runner_align_enable", "runner_align_mode", "runner_align_temperature", "runner_align_scale", "runner_align_bias", "runner_vocab_bias_path", "supports_previous_hidden_states",
+    "adaptive_switch_per_min", "adaptive_high_k_occ", "adaptive_hist",
+    "adaptive_align_score", "adaptive_delta_hs", "adaptive_align_cap",
     "bench_log", "server_log",
 ]
 row = [
-    tag, baseline, serve_k, force_hs, align_enable, align_scale, align_bias,
+    tag, baseline, serve_k, force_hs,
+    align_enable, align_mode, align_temperature, align_scale, align_bias, align_vocab_bias_path,
+    adaptive_k_enable, adaptive_enable_utility, adaptive_align_gate_enable,
     successful_requests, duration_s,
     output_tok_s, total_tok_s,
     mean_ttft_ms, mean_tpot_ms, mean_itl_ms,
     p99_ttft_ms, p99_tpot_ms, p99_itl_ms,
     draft_acceptance_rate, system_efficiency,
     hs_ratio, align_accept, align_accept_with_hs, align_accept_no_hs, align_tps, align_p95_ms,
+    runner_align_enable, runner_align_mode, runner_align_temperature, runner_align_scale, runner_align_bias, runner_vocab_bias_path, supports_previous_hidden_states,
+    adaptive_switch_per_min, adaptive_high_k_occ, adaptive_hist,
+    adaptive_align_score, adaptive_delta_hs, adaptive_align_cap,
     bench_log, server_log,
 ]
 
@@ -331,21 +416,48 @@ run_case() {
   local align_enable="$5"
   local align_scale="$6"
   local align_bias="$7"
+  local align_mode="${A2_ALIGN_MODE}"
+  local align_temperature="${A2_ALIGN_TEMPERATURE}"
+  local align_vocab_bias_path="${A2_ALIGN_VOCAB_BIAS_PATH}"
+  local adaptive_k_enable="${VLLM_ASCEND_ADAPTIVE_K_ENABLE:-0}"
+  local adaptive_enable_utility="${VLLM_ASCEND_ADAPTIVE_ENABLE_UTILITY:-0}"
+  local adaptive_align_gate_enable="${VLLM_ASCEND_ADAPTIVE_ALIGN_GATE_ENABLE:-0}"
 
-  local server_log="${LOG_DIR}/server_${tag}.log"
-  local bench_log="${LOG_DIR}/bench_${tag}.log"
-  local merged_log="${LOG_DIR}/merged_${tag}.log"
-  local key_log="${LOG_DIR}/key_${tag}.log"
-  local result_log="${LOG_DIR}/result_${tag}.txt"
+  local server_log=""
+  local bench_log=""
+  local merged_log=""
+  local key_log=""
+  local result_log=""
 
-  echo "===== CASE ${tag} START $(date '+%F %T') =====" | tee -a "$merged_log"
+  if [[ "$LOG_FILE_MODE" == "two" ]]; then
+    server_log="$SERVER_LOG_FILE"
+    bench_log="$BENCH_LOG_FILE"
+    {
+      echo "===== CASE ${tag} START $(date '+%F %T') ====="
+      echo "baseline=${baseline} serve_k=${serve_k} force_hs=${force_hs} align=${align_enable} mode=${align_mode} temp=${align_temperature} scale=${align_scale} bias=${align_bias}"
+    } >>"$server_log"
+    {
+      echo "===== CASE ${tag} START $(date '+%F %T') ====="
+      echo "baseline=${baseline} serve_k=${serve_k} force_hs=${force_hs} align=${align_enable} mode=${align_mode} temp=${align_temperature} scale=${align_scale} bias=${align_bias}"
+    } >>"$bench_log"
+  else
+    server_log="${LOG_DIR}/server_${tag}.log"
+    bench_log="${LOG_DIR}/bench_${tag}.log"
+    merged_log="${LOG_DIR}/merged_${tag}.log"
+    key_log="${LOG_DIR}/key_${tag}.log"
+    result_log="${LOG_DIR}/result_${tag}.txt"
+    echo "===== CASE ${tag} START $(date '+%F %T') =====" | tee -a "$merged_log"
+  fi
 
   kill_stale_vllm
 
   export VLLM_ASCEND_SPEC_FORCE_RETURN_HS="$force_hs"
   export VLLM_ASCEND_DRAFT_ALIGN_ENABLE="$align_enable"
+  export VLLM_ASCEND_DRAFT_ALIGN_MODE="$align_mode"
+  export VLLM_ASCEND_DRAFT_ALIGN_TEMPERATURE="$align_temperature"
   export VLLM_ASCEND_DRAFT_ALIGN_SCALE="$align_scale"
   export VLLM_ASCEND_DRAFT_ALIGN_BIAS="$align_bias"
+  export VLLM_ASCEND_DRAFT_ALIGN_VOCAB_BIAS_PATH="$align_vocab_bias_path"
   export VLLM_ASCEND_ALIGN_LOG_INTERVAL="$ALIGN_LOG_INTERVAL"
 
   local -a serve_cmd=(
@@ -365,28 +477,56 @@ run_case() {
     "$DRAFT_MODEL_PATH" "$serve_k"
   serve_cmd+=(--speculative-config "$spec_cfg")
 
-  setsid "${serve_cmd[@]}" >"$server_log" 2>&1 &
+  if [[ "$LOG_FILE_MODE" == "two" ]]; then
+    setsid "${serve_cmd[@]}" >>"$server_log" 2>&1 &
+  else
+    setsid "${serve_cmd[@]}" >"$server_log" 2>&1 &
+  fi
   CURRENT_PID=$!
   CURRENT_PGID="$(ps -o pgid= -p "$CURRENT_PID" | tr -d ' ' || true)"
   [[ -z "${CURRENT_PGID}" ]] && CURRENT_PGID="$CURRENT_PID"
 
-  echo "[INFO] server pid=${CURRENT_PID}, pgid=${CURRENT_PGID}" | tee -a "$merged_log"
+  if [[ "$LOG_FILE_MODE" == "two" ]]; then
+    echo "[INFO] server pid=${CURRENT_PID}, pgid=${CURRENT_PGID}" >>"$server_log"
+    echo "[INFO] server pid=${CURRENT_PID}, pgid=${CURRENT_PGID}" >>"$bench_log"
+  else
+    echo "[INFO] server pid=${CURRENT_PID}, pgid=${CURRENT_PGID}" | tee -a "$merged_log"
+  fi
 
   if ! wait_server_ready "$READY_TIMEOUT_S"; then
-    tail -n 200 "$server_log" | tee -a "$merged_log" || true
+    if [[ "$LOG_FILE_MODE" == "two" ]]; then
+      tail -n 200 "$server_log" || true
+    else
+      tail -n 200 "$server_log" | tee -a "$merged_log" || true
+    fi
     stop_server
     return 1
   fi
 
-  {
-    echo "[INFO] benchmark start $(date '+%F %T')"
-    run_bench_cmd
-    echo "[INFO] benchmark end $(date '+%F %T')"
-  } 2>&1 | tee "$bench_log" | tee -a "$merged_log"
+  if [[ "$LOG_FILE_MODE" == "two" ]]; then
+    {
+      echo "[INFO] benchmark start $(date '+%F %T')"
+      run_bench_cmd
+      echo "[INFO] benchmark end $(date '+%F %T')"
+    } 2>&1 | tee -a "$bench_log"
+  else
+    {
+      echo "[INFO] benchmark start $(date '+%F %T')"
+      run_bench_cmd
+      echo "[INFO] benchmark end $(date '+%F %T')"
+    } 2>&1 | tee "$bench_log" | tee -a "$merged_log"
+  fi
 
   stop_server
 
-  grep -hE "ALIGN P1/P2|P1P2|Speculative metrics|stage times|Avg generation throughput|Draft acceptance rate|System efficiency" \
+  if [[ "$LOG_FILE_MODE" == "two" ]]; then
+    echo "===== CASE ${tag} END $(date '+%F %T') =====" >>"$server_log"
+    echo "===== CASE ${tag} END $(date '+%F %T') =====" >>"$bench_log"
+    echo "[INFO] logs: $server_log | $bench_log"
+    return 0
+  fi
+
+  grep -hE "ALIGN P1/P2|P1P2|AdaptiveK update|AdaptiveK utility switch|AdaptiveK stats|AdaptiveK align_gate|DRAFT_ALIGN config|Speculative metrics|stage times|Avg generation throughput|Draft acceptance rate|System efficiency" \
     "$server_log" "$bench_log" > "$key_log" || true
 
   build_case_result_file \
@@ -396,6 +536,8 @@ run_case() {
   extract_to_summary_csv \
     "$tag" "$baseline" "$serve_k" \
     "$force_hs" "$align_enable" "$align_scale" "$align_bias" \
+    "$align_mode" "$align_temperature" "$align_vocab_bias_path" \
+    "$adaptive_k_enable" "$adaptive_enable_utility" "$adaptive_align_gate_enable" \
     "$bench_log" "$server_log"
 
   echo "===== CASE ${tag} END $(date '+%F %T') =====" | tee -a "$merged_log"
@@ -412,10 +554,17 @@ if [[ ${#CASE_TAGS[@]} -eq 0 ]]; then
   exit 1
 fi
 
-print_case_table | tee "${LOG_DIR}/case_table.txt"
+if [[ "$LOG_FILE_MODE" == "two" ]]; then
+  print_case_table
+else
+  print_case_table | tee "${LOG_DIR}/case_table.txt"
+fi
 
 failed=0
-: >"$FAILED_TXT"
+declare -a FAILED_CASES=()
+if [[ "$LOG_FILE_MODE" == "full" ]]; then
+  : >"$FAILED_TXT"
+fi
 
 for ((i = 0; i < ${#CASE_TAGS[@]}; i++)); do
   if ! run_case \
@@ -426,15 +575,38 @@ for ((i = 0; i < ${#CASE_TAGS[@]}; i++)); do
     "${CASE_ALIGN_ENABLE[$i]}" \
     "${CASE_ALIGN_SCALE[$i]}" \
     "${CASE_ALIGN_BIAS[$i]}"; then
-    echo "[ERROR] case failed: ${CASE_TAGS[$i]}" | tee -a "$FAILED_TXT"
+    msg="[ERROR] case failed: ${CASE_TAGS[$i]}"
+    echo "$msg"
+    FAILED_CASES+=("${CASE_TAGS[$i]}")
+    if [[ "$LOG_FILE_MODE" == "full" ]]; then
+      echo "$msg" | tee -a "$FAILED_TXT"
+    fi
     failed=$((failed + 1))
   fi
 done
 
 echo "[DONE] logs saved to: $LOG_DIR"
-echo "[DONE] summary file: $SUMMARY_CSV"
+if [[ "$LOG_FILE_MODE" == "two" ]]; then
+  echo "[DONE] server log: $SERVER_LOG_FILE"
+  echo "[DONE] bench log: $BENCH_LOG_FILE"
+else
+  echo "[DONE] summary file: $SUMMARY_CSV"
+fi
 
 if [[ "$failed" -gt 0 ]]; then
-  echo "[DONE] failed cases: $failed (details: $FAILED_TXT)"
+  if [[ "$LOG_FILE_MODE" == "two" ]]; then
+    echo "[DONE] failed cases: $failed (${FAILED_CASES[*]})"
+  else
+    echo "[DONE] failed cases: $failed (details: $FAILED_TXT)"
+  fi
   exit 2
 fi
+
+
+
+
+
+
+
+
+
