@@ -1,0 +1,25 @@
+# tag|mode|init_k|serve_k|force_hs|align_enable|align_scale|align_bias|extra_env|extra_serve_args|extra_bench_args
+# mode: fixed | adaptive
+# extra_env format: KEY1=VAL1;KEY2=VAL2
+
+# Baselines: A0/A1/A2 × k2/k4/k8
+A0_default_k2|fixed|0|2|0|0|1.0|0.0|||
+A1_forcehs_k2|fixed|0|2|1|0|1.0|0.0|VLLM_ASCEND_ALIGN_LOG_INTERVAL=200||
+A2_forcehs_calib_k2|fixed|0|2|1|1|1.0|0.0|VLLM_ASCEND_ALIGN_LOG_INTERVAL=200||
+
+A0_default_k4|fixed|0|4|0|0|1.0|0.0|||
+A1_forcehs_k4|fixed|0|4|1|0|1.0|0.0|VLLM_ASCEND_ALIGN_LOG_INTERVAL=200||
+A2_forcehs_calib_k4|fixed|0|4|1|1|1.0|0.0|VLLM_ASCEND_ALIGN_LOG_INTERVAL=200||
+
+A0_default_k8|fixed|0|8|0|0|1.0|0.0|||
+A1_forcehs_k8|fixed|0|8|1|0|1.0|0.0|VLLM_ASCEND_ALIGN_LOG_INTERVAL=200||
+A2_forcehs_calib_k8|fixed|0|8|1|1|1.0|0.0|VLLM_ASCEND_ALIGN_LOG_INTERVAL=200||
+
+# Adaptive examples
+init2_cap8_adaptive|adaptive|2|8|1|0|1.0|0.0|||
+init4_cap8_adaptive|adaptive|4|8|1|0|1.0|0.0|||
+
+# v2 alignment knobs (used by scripts/model_alignment_bench_v2.sh):
+# export VLLM_ASCEND_DRAFT_ALIGN_MODE=temperature
+# export VLLM_ASCEND_DRAFT_ALIGN_TEMPERATURE=0.95
+# export VLLM_ASCEND_DRAFT_ALIGN_VOCAB_BIAS_PATH=/path/to/vocab_bias.pt
