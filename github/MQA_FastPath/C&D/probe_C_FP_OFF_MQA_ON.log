@@ -1,0 +1,27 @@
+[PROBE] date=2026-03-11 19:03:20
+[PROBE] WORKSPACE_DIR=/mnt/ky2307909
+[PROBE] ROOT_DIR=/mnt/ky2307909
+[PROBE] LOG_ROOT=/mnt/ky2307909/logs/spec_patch_verify_20260311_190320
+[PROBE] PYTHONPATH=/mnt/ky2307909/vllm-ascend:/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/mindformers:
+[PROBE] VLLM_ASCEND_SPEC_GPU_MULTI_STEP_BACKENDS=FLASH_ATTN
+[PROBE] VLLM_ASCEND_SPEC_MQA_BACKENDS=FLASH_ATTN,ASCEND
+[PROBE] VLLM_ASCEND_BASE_STAGE_LOG_ENABLE=1
+[PROBE] VLLM_ASCEND_BASE_STAGE_LOG_INTERVAL=50
+[PROBE] VLLM_ASCEND_RUNNER_STAGE_LOG_ENABLE=1
+[PROBE] VLLM_ASCEND_RUNNER_STAGE_LOG_INTERVAL=50
+INFO 03-11 19:03:27 [importing.py:17] Triton not installed or not compatible; certain GPU-related functions will not be available.
+WARNING 03-11 19:03:27 [importing.py:29] Triton is not installed. Using dummy decorators. Install it via `pip install triton` to enable kernel compilation.
+INFO 03-11 19:03:28 [__init__.py:39] Available plugins for group vllm.platform_plugins:
+INFO 03-11 19:03:28 [__init__.py:41] - ascend -> vllm_ascend:register
+INFO 03-11 19:03:28 [__init__.py:44] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 03-11 19:03:28 [__init__.py:235] Platform plugin ascend is activated
+WARNING 03-11 19:03:32 [_custom_ops.py:22] Failed to import from vllm._C with ImportError('/root/miniconda3/envs/lxc/lib/python3.10/site-packages/vllm/_C.abi3.so: undefined symbol: _ZN3c108ListType3getERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS_4Type24SingletonOrSharedTypePtrIS9_EE')
+[PROBE] vllm_ascend=/root/miniconda3/envs/lxc/lib/python3.10/site-packages/vllm_ascend/__init__.py
+[PROBE] worker=/root/miniconda3/envs/lxc/lib/python3.10/site-packages/vllm_ascend/worker/worker.py
+[PROBE] model_runner=/root/miniconda3/envs/lxc/lib/python3.10/site-packages/vllm_ascend/worker/model_runner.py
+[PROBE] draft_model_runner=/root/miniconda3/envs/lxc/lib/python3.10/site-packages/vllm_ascend/worker/draft_model_runner.py
+[PROBE] patch_spec_decode_worker=/root/miniconda3/envs/lxc/lib/python3.10/site-packages/vllm_ascend/patch/worker/patch_common/patch_spec_decode_worker.py
+[PROBE] patch_multi_step_worker=/root/miniconda3/envs/lxc/lib/python3.10/site-packages/vllm_ascend/patch/worker/patch_common/patch_multi_step_worker.py
+[PROBE] worker_has_base_stage_log=True
+[PROBE] runner_has_base_stage_log=True
+[PROBE] draft_has_fastpath_log=True

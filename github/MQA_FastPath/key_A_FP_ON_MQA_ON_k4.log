@@ -1,0 +1,266 @@
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:09:08 [patch_spec_decode_worker.py:125] [Speculative Decoding] Draft runner_cls=<class 'vllm_ascend.worker.draft_model_runner.TP1DraftModelRunner'> (draft_tp=1 target_tp=1 model_type=qwen3)
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:09:08 [patch_spec_decode_worker.py:188] [Speculative Decoding] MQA scorer backend capability detected (backend=ASCEND, capability=ASCEND,FLASH_ATTN).
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:09:22 [spec_decode_worker.py:478] [Speculative Decoding] Use MQA scorer for scoring proposals.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:09:58 [patch_multi_step_worker.py:54] [Speculative Decoding] MultiStep probe: model_runner=<class 'vllm_ascend.worker.draft_model_runner.TP1DraftModelRunner'> is_tp1_runner=True sample_len=4
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:09:58 [patch_multi_step_worker.py:68] [Speculative Decoding] MultiStep probe: supports_gpu_multi_step=True ms_total=1 ms_hit=1 fail_disabled=0 fail_prompt=0 fail_backend=0 fail_lora=0 fail_adapter=0
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:21 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=37.67 scoring_time_ms=53.33 verification_time_ms=3.65
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:23 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.3421 accept_with_hs=0.0000 accept_no_hs=0.3421 throughput_tps=0.190 iter_p95=208.609
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:24 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.4219 accept_with_hs=0.0000 accept_no_hs=0.4219 throughput_tps=0.386 iter_p95=208.609
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:25 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.8] waste_ratio=0.1000
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:26 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.5357 accept_with_hs=0.0000 accept_no_hs=0.5357 throughput_tps=0.631 iter_p95=206.638
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:26 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.000, System efficiency: 0.200, Number of speculative tokens: 4, Number of accepted tokens: 0, Number of draft tokens: 4, Number of emitted tokens: 1.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:26 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=38.58 scoring_time_ms=56.90 verification_time_ms=3.52
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:27 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.75] waste_ratio=0.1250
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:27 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.5962 accept_with_hs=0.0000 accept_no_hs=0.5962 throughput_tps=0.852 iter_p95=206.638
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:28 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7667] waste_ratio=0.1167
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:29 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.6371 accept_with_hs=0.0000 accept_no_hs=0.6371 throughput_tps=1.065 iter_p95=206.599
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:29 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.75] waste_ratio=0.1250
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:30 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.6806 accept_with_hs=0.0000 accept_no_hs=0.6806 throughput_tps=1.296 iter_p95=206.599
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:31 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.211, System efficiency: 0.385, Number of speculative tokens: 2, Number of accepted tokens: 19, Number of draft tokens: 90, Number of emitted tokens: 52.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:32 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.74] waste_ratio=0.1300
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:32 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=44.92 scoring_time_ms=60.61 verification_time_ms=6.10
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:36 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.329, System efficiency: 0.506, Number of speculative tokens: 2, Number of accepted tokens: 56, Number of draft tokens: 170, Number of emitted tokens: 129.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:40 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.4670 accept_with_hs=0.0000 accept_no_hs=0.4670 throughput_tps=5.352 iter_p95=206.638
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:41 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=54.23 scoring_time_ms=83.89 verification_time_ms=15.85
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:46 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.5156 accept_with_hs=0.0000 accept_no_hs=0.5156 throughput_tps=26.485 iter_p95=234.577
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:46 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.057] waste_ratio=0.4715
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:46 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.078, System efficiency: 0.325, Number of speculative tokens: 2, Number of accepted tokens: 77, Number of draft tokens: 985, Number of emitted tokens: 480.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:47 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=52.36 scoring_time_ms=93.49 verification_time_ms=22.38
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:49 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.5365 accept_with_hs=0.0000 accept_no_hs=0.5365 throughput_tps=46.538 iter_p95=234.577
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:50 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.1958] waste_ratio=0.4021
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:51 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.071, System efficiency: 0.355, Number of speculative tokens: 3, Number of accepted tokens: 358, Number of draft tokens: 5077, Number of emitted tokens: 2706.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:52 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.5782 accept_with_hs=0.0000 accept_no_hs=0.5782 throughput_tps=67.093 iter_p95=237.188
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:52 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=65.13 scoring_time_ms=75.31 verification_time_ms=12.53
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:55 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.6644 accept_with_hs=0.0000 accept_no_hs=0.6644 throughput_tps=98.663 iter_p95=289.434
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:56 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.9071, 0.9031] waste_ratio=0.0633
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:57 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.225, System efficiency: 0.446, Number of speculative tokens: 2, Number of accepted tokens: 2605, Number of draft tokens: 11577, Number of emitted tokens: 7745.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:58 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=61.08 scoring_time_ms=74.28 verification_time_ms=16.47
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:10:58 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.7280 accept_with_hs=0.0000 accept_no_hs=0.7280 throughput_tps=131.161 iter_p95=293.376
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:02 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.7723 accept_with_hs=0.0000 accept_no_hs=0.7723 throughput_tps=162.242 iter_p95=330.777
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:02 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.464, System efficiency: 0.578, Number of speculative tokens: 3, Number of accepted tokens: 8101, Number of draft tokens: 17466, Number of emitted tokens: 15156.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:03 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=57.42 scoring_time_ms=77.13 verification_time_ms=19.68
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:06 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8018 accept_with_hs=0.0000 accept_no_hs=0.8018 throughput_tps=187.692 iter_p95=335.077
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:07 [spec_decode_worker.py:1266] P1P2 k=4 step_accept=[1.0, 1.0, 1.0, 1.0] waste_ratio=0.0000
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:07 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.596, System efficiency: 0.644, Number of speculative tokens: 4, Number of accepted tokens: 13918, Number of draft tokens: 23367, Number of emitted tokens: 22574.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:09 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=53.75 scoring_time_ms=71.68 verification_time_ms=15.27
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:09 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8226 accept_with_hs=0.0000 accept_no_hs=0.8226 throughput_tps=208.599 iter_p95=330.777
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:11 [spec_decode_worker.py:1266] P1P2 k=4 step_accept=[1.0, 1.0, 1.0, 1.0] waste_ratio=0.0000
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:12 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8374 accept_with_hs=0.0000 accept_no_hs=0.8374 throughput_tps=225.162 iter_p95=330.777
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:13 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.668, System efficiency: 0.679, Number of speculative tokens: 4, Number of accepted tokens: 19050, Number of draft tokens: 28499, Number of emitted tokens: 29011.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:14 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=51.67 scoring_time_ms=69.14 verification_time_ms=13.20
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:14 [spec_decode_worker.py:1266] P1P2 k=4 step_accept=[1.0, 1.0, 1.0, 1.0] waste_ratio=0.0000
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:16 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8484 accept_with_hs=0.0000 accept_no_hs=0.8484 throughput_tps=237.123 iter_p95=330.331
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:18 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.709, System efficiency: 0.698, Number of speculative tokens: 4, Number of accepted tokens: 23014, Number of draft tokens: 32463, Number of emitted tokens: 33966.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:19 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8260 accept_with_hs=0.0000 accept_no_hs=0.8260 throughput_tps=237.786 iter_p95=330.331
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:20 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=73.29 scoring_time_ms=93.42 verification_time_ms=9.22
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:22 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.8952, 0.891] waste_ratio=0.0713
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:23 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8317 accept_with_hs=0.0000 accept_no_hs=0.8317 throughput_tps=241.751 iter_p95=331.352
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:23 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.697, System efficiency: 0.684, Number of speculative tokens: 3, Number of accepted tokens: 25084, Number of draft tokens: 36014, Number of emitted tokens: 36931.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:25 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=50.09 scoring_time_ms=91.14 verification_time_ms=8.59
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:25 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.9476, 0.9455] waste_ratio=0.0356
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:26 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8367 accept_with_hs=0.0000 accept_no_hs=0.8367 throughput_tps=244.548 iter_p95=332.141
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:28 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.713, System efficiency: 0.695, Number of speculative tokens: 3, Number of accepted tokens: 27136, Number of draft tokens: 38069, Number of emitted tokens: 39665.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:29 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8383 accept_with_hs=0.0000 accept_no_hs=0.8383 throughput_tps=245.162 iter_p95=332.011
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:31 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.8581] waste_ratio=0.0710
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:31 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=70.82 scoring_time_ms=86.34 verification_time_ms=6.38
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:31 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8404 accept_with_hs=0.0000 accept_no_hs=0.8404 throughput_tps=244.929 iter_p95=332.011
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:33 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.929] waste_ratio=0.0355
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:33 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.721, System efficiency: 0.701, Number of speculative tokens: 2, Number of accepted tokens: 28620, Number of draft tokens: 39712, Number of emitted tokens: 41780.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:34 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8422 accept_with_hs=0.0000 accept_no_hs=0.8422 throughput_tps=243.872 iter_p95=331.352
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:35 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.9359] waste_ratio=0.0320
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:36 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8433 accept_with_hs=0.0000 accept_no_hs=0.8433 throughput_tps=242.031 iter_p95=331.352
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:36 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=69.06 scoring_time_ms=85.06 verification_time_ms=5.75
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:38 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.9519] waste_ratio=0.0240
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:38 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.726, System efficiency: 0.708, Number of speculative tokens: 2, Number of accepted tokens: 29504, Number of draft tokens: 40614, Number of emitted tokens: 43114.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:38 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8445 accept_with_hs=0.0000 accept_no_hs=0.8445 throughput_tps=240.117 iter_p95=330.928
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:40 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.9615] waste_ratio=0.0192
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:41 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8454 accept_with_hs=0.0000 accept_no_hs=0.8454 throughput_tps=238.166 iter_p95=330.928
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:41 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=46.68 scoring_time_ms=83.39 verification_time_ms=5.17
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:42 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.968] waste_ratio=0.0160
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:43 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8460 accept_with_hs=0.0000 accept_no_hs=0.8460 throughput_tps=236.231 iter_p95=330.777
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:43 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.731, System efficiency: 0.712, Number of speculative tokens: 2, Number of accepted tokens: 30136, Number of draft tokens: 41246, Number of emitted tokens: 44062.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:44 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.9725] waste_ratio=0.0137
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:44 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8465 accept_with_hs=0.0000 accept_no_hs=0.8465 throughput_tps=234.020 iter_p95=330.777
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:46 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.976] waste_ratio=0.0120
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:46 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8469 accept_with_hs=0.0000 accept_no_hs=0.8469 throughput_tps=231.928 iter_p95=330.514
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:47 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=43.61 scoring_time_ms=79.42 verification_time_ms=4.80
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:48 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.9786] waste_ratio=0.0107
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:48 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8473 accept_with_hs=0.0000 accept_no_hs=0.8473 throughput_tps=229.873 iter_p95=330.514
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:48 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.733, System efficiency: 0.715, Number of speculative tokens: 2, Number of accepted tokens: 30512, Number of draft tokens: 41622, Number of emitted tokens: 44626.
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:50 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.9341] waste_ratio=0.0329
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:50 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8471 accept_with_hs=0.0000 accept_no_hs=0.8471 throughput_tps=227.371 iter_p95=330.331
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:51 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.8825] waste_ratio=0.0587
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:52 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8470 accept_with_hs=0.0000 accept_no_hs=0.8470 throughput_tps=224.997 iter_p95=330.331
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/server_A_FP_ON_MQA_ON_k4.log:INFO 03-11 17:11:52 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=38.99 scoring_time_ms=54.40 verification_time_ms=3.35
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/bench_A_FP_ON_MQA_ON_k4.log:Output token throughput (tok/s):         549.32    
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/bench_A_FP_ON_MQA_ON_k4.log:Mean TPOT (ms):                          317.57    
+/mnt/ky2307909/siyuan.tong/logs/spec_patch_verify_20260311_170750/bench_A_FP_ON_MQA_ON_k4.log:Mean ITL (ms):                           386.92    
+INFO 03-11 17:09:34 [importing.py:17] Triton not installed or not compatible; certain GPU-related functions will not be available.
+WARNING 03-11 17:09:34 [importing.py:29] Triton is not installed. Using dummy decorators. Install it via `pip install triton` to enable kernel compilation.
+INFO 03-11 17:09:36 [__init__.py:39] Available plugins for group vllm.platform_plugins:
+INFO 03-11 17:09:36 [__init__.py:41] - ascend -> vllm_ascend:register
+INFO 03-11 17:09:36 [__init__.py:44] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 03-11 17:09:36 [__init__.py:235] Platform plugin ascend is activated
+WARNING 03-11 17:09:39 [_custom_ops.py:22] Failed to import from vllm._C with ImportError('/root/miniconda3/envs/lxc/lib/python3.10/site-packages/vllm/_C.abi3.so: undefined symbol: _ZN3c108ListType3getERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS_4Type24SingletonOrSharedTypePtrIS9_EE')
+WARNING 03-11 17:09:45 [registry.py:401] Model architecture DeepSeekMTPModel is already registered, and will be overwritten by the new model class vllm_ascend.models.deepseek_mtp:CustomDeepSeekMTP.
+WARNING 03-11 17:09:45 [registry.py:401] Model architecture Qwen2ForCausalLM is already registered, and will be overwritten by the new model class vllm_ascend.models.qwen2:CustomQwen2ForCausalLM.
+WARNING 03-11 17:09:45 [registry.py:401] Model architecture Qwen2VLForConditionalGeneration is already registered, and will be overwritten by the new model class vllm_ascend.models.qwen2_vl:AscendQwen2VLForConditionalGeneration.
+WARNING 03-11 17:09:45 [registry.py:401] Model architecture Qwen2_5_VLForConditionalGeneration is already registered, and will be overwritten by the new model class vllm_ascend.models.qwen2_5_vl:AscendQwen2_5_VLForConditionalGeneration.
+WARNING 03-11 17:09:45 [registry.py:401] Model architecture DeepseekV2ForCausalLM is already registered, and will be overwritten by the new model class vllm_ascend.models.deepseek_v2:CustomDeepseekV2ForCausalLM.
+WARNING 03-11 17:09:45 [registry.py:401] Model architecture DeepseekV3ForCausalLM is already registered, and will be overwritten by the new model class vllm_ascend.models.deepseek_v2:CustomDeepseekV3ForCausalLM.
+WARNING 03-11 17:09:45 [registry.py:401] Model architecture Qwen3MoeForCausalLM is already registered, and will be overwritten by the new model class vllm_ascend.models.qwen3_moe:CustomQwen3MoeForCausalLM.
+WARNING 03-11 17:09:45 [registry.py:401] Model architecture Qwen3ForCausalLM is already registered, and will be overwritten by the new model class vllm_ascend.models.qwen3:CustomQwen3ForCausalLM.
+INFO 03-11 17:09:46 [config.py:1980] Disabled the custom all-reduce kernel because it is not supported on current platform.
+INFO 03-11 17:09:48 [config.py:1980] Disabled the custom all-reduce kernel because it is not supported on current platform.
+INFO 03-11 17:09:49 [config.py:1980] Disabled the custom all-reduce kernel because it is not supported on current platform.
+INFO 03-11 17:09:51 [config.py:1980] Disabled the custom all-reduce kernel because it is not supported on current platform.
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0xfffc255bf490>, endpoint_type='vllm', label=None, base_url='http://127.0.0.1:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', dataset_name='sharegpt', dataset_path='/mnt/ky2307909/siyuan.tong/dataset/ShareGPT_V3_unfiltered_cleaned_split.json', max_concurrency=None, model='qwen3-8B', tokenizer='/mnt/ky2307909/siyuan.tong/Qwen3-8B', use_beam_search=False, num_prompts=200, logprobs=None, request_rate=16.0, burstiness=1.0, seed=0, trust_remote_code=True, disable_tqdm=False, profile=False, save_result=False, save_detailed=False, append_result=False, metadata=None, result_dir=None, result_filename=None, ignore_eos=False, percentile_metrics='ttft,tpot,itl', metric_percentiles='99', goodput=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, hf_subset=None, hf_split=None, hf_output_len=None, top_p=None, top_k=None, min_p=None, temperature=None, tokenizer_mode='auto', served_model_name=None, lora_modules=None)
+Starting initial single prompt test run...
+Initial test run completed. Starting main benchmark run...
+Traffic request rate: 16.0
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: None
+
+  0%|          | 0/200 [00:00<?, ?it/s]
+  0%|          | 1/200 [00:04<15:26,  4.65s/it]
+  1%|          | 2/200 [00:09<16:18,  4.94s/it]
+  2%|¨‡         | 3/200 [00:10<10:35,  3.23s/it]
+  2%|¨†         | 5/200 [00:13<06:28,  1.99s/it]
+  3%|¨†         | 6/200 [00:13<05:06,  1.58s/it]
+  4%|¨…         | 9/200 [00:13<02:25,  1.32it/s]
+  5%|¨„         | 10/200 [00:14<02:05,  1.51it/s]
+  7%|¨ƒ         | 14/200 [00:14<01:03,  2.95it/s]
+  8%|¨‚         | 16/200 [00:14<00:52,  3.53it/s]
+  9%|¨         | 18/200 [00:15<00:55,  3.27it/s]
+ 10%|¨€         | 20/200 [00:15<00:46,  3.88it/s]
+ 12%|¨€¨‡        | 23/200 [00:16<00:34,  5.18it/s]
+ 14%|¨€¨†        | 27/200 [00:16<00:25,  6.75it/s]
+ 16%|¨€¨„        | 31/200 [00:16<00:19,  8.49it/s]
+ 16%|¨€¨ƒ        | 33/200 [00:16<00:20,  8.29it/s]
+ 18%|¨€¨‚        | 35/200 [00:17<00:20,  8.03it/s]
+ 18%|¨€¨‚        | 36/200 [00:17<00:23,  6.88it/s]
+ 20%|¨€¨        | 39/200 [00:17<00:20,  8.05it/s]
+ 20%|¨€¨€        | 41/200 [00:17<00:20,  7.90it/s]
+ 22%|¨€¨€¨‡       | 43/200 [00:18<00:20,  7.71it/s]
+ 22%|¨€¨€¨‡       | 44/200 [00:18<00:23,  6.53it/s]
+ 23%|¨€¨€¨†       | 46/200 [00:18<00:22,  6.73it/s]
+ 24%|¨€¨€¨…       | 49/200 [00:19<00:23,  6.38it/s]
+ 26%|¨€¨€¨„       | 51/200 [00:19<00:23,  6.34it/s]
+ 28%|¨€¨€¨‚       | 55/200 [00:19<00:16,  8.58it/s]
+ 28%|¨€¨€¨‚       | 56/200 [00:20<00:19,  7.34it/s]
+ 29%|¨€¨€¨       | 58/200 [00:20<00:19,  7.44it/s]
+ 30%|¨€¨€¨€       | 60/200 [00:21<00:39,  3.51it/s]
+ 32%|¨€¨€¨€¨‡      | 63/200 [00:22<00:30,  4.56it/s]
+ 33%|¨€¨€¨€¨†      | 66/200 [00:22<00:24,  5.47it/s]
+ 36%|¨€¨€¨€¨„      | 71/200 [00:22<00:16,  7.67it/s]
+ 36%|¨€¨€¨€¨„      | 72/200 [00:23<00:19,  6.48it/s]
+ 38%|¨€¨€¨€¨‚      | 75/200 [00:23<00:17,  7.15it/s]
+ 38%|¨€¨€¨€¨‚      | 77/200 [00:23<00:17,  6.85it/s]
+ 40%|¨€¨€¨€¨      | 79/200 [00:24<00:28,  4.20it/s]
+ 40%|¨€¨€¨€¨€      | 80/200 [00:26<00:48,  2.47it/s]
+ 40%|¨€¨€¨€¨€      | 81/200 [00:26<00:46,  2.56it/s]
+ 42%|¨€¨€¨€¨€¨‡     | 84/200 [00:27<00:36,  3.16it/s]
+ 42%|¨€¨€¨€¨€¨†     | 85/200 [00:27<00:37,  3.03it/s]
+ 43%|¨€¨€¨€¨€¨†     | 86/200 [00:27<00:38,  2.92it/s]
+ 44%|¨€¨€¨€¨€¨…     | 88/200 [00:28<00:40,  2.79it/s]
+ 45%|¨€¨€¨€¨€¨„     | 90/200 [00:28<00:32,  3.42it/s]
+ 46%|¨€¨€¨€¨€¨„     | 91/200 [00:29<00:32,  3.35it/s]
+ 46%|¨€¨€¨€¨€¨„     | 92/200 [00:29<00:32,  3.28it/s]
+ 46%|¨€¨€¨€¨€¨ƒ     | 93/200 [00:29<00:33,  3.22it/s]
+ 48%|¨€¨€¨€¨€¨‚     | 96/200 [00:30<00:22,  4.60it/s]
+ 48%|¨€¨€¨€¨€¨‚     | 97/200 [00:30<00:25,  4.00it/s]
+ 50%|¨€¨€¨€¨€¨     | 99/200 [00:31<00:22,  4.40it/s]
+ 50%|¨€¨€¨€¨€¨€     | 100/200 [00:31<00:25,  3.88it/s]
+ 52%|¨€¨€¨€¨€¨€¨†    | 105/200 [00:31<00:14,  6.74it/s]
+ 54%|¨€¨€¨€¨€¨€¨†    | 107/200 [00:32<00:14,  6.35it/s]
+ 56%|¨€¨€¨€¨€¨€¨„    | 111/200 [00:32<00:11,  7.65it/s]
+ 56%|¨€¨€¨€¨€¨€¨ƒ    | 113/200 [00:33<00:15,  5.60it/s]
+ 57%|¨€¨€¨€¨€¨€¨ƒ    | 114/200 [00:33<00:17,  4.86it/s]
+ 58%|¨€¨€¨€¨€¨€¨‚    | 116/200 [00:33<00:16,  5.04it/s]
+ 58%|¨€¨€¨€¨€¨€¨‚    | 117/200 [00:34<00:18,  4.43it/s]
+ 59%|¨€¨€¨€¨€¨€¨    | 118/200 [00:35<00:26,  3.15it/s]
+ 60%|¨€¨€¨€¨€¨€¨€    | 120/200 [00:35<00:21,  3.71it/s]
+ 60%|¨€¨€¨€¨€¨€¨€    | 121/200 [00:35<00:22,  3.54it/s]
+ 62%|¨€¨€¨€¨€¨€¨€¨‡   | 124/200 [00:36<00:23,  3.21it/s]
+ 63%|¨€¨€¨€¨€¨€¨€¨†   | 126/200 [00:37<00:27,  2.68it/s]
+ 64%|¨€¨€¨€¨€¨€¨€¨†   | 127/200 [00:38<00:26,  2.72it/s]
+ 66%|¨€¨€¨€¨€¨€¨€¨„   | 131/200 [00:38<00:15,  4.45it/s]
+ 66%|¨€¨€¨€¨€¨€¨€¨„   | 132/200 [00:40<00:30,  2.23it/s]
+ 67%|¨€¨€¨€¨€¨€¨€¨ƒ   | 134/200 [00:40<00:23,  2.75it/s]
+ 68%|¨€¨€¨€¨€¨€¨€¨‚   | 137/200 [00:40<00:16,  3.77it/s]
+ 69%|¨€¨€¨€¨€¨€¨€¨   | 138/200 [00:41<00:20,  3.06it/s]
+ 70%|¨€¨€¨€¨€¨€¨€¨   | 139/200 [00:42<00:28,  2.12it/s]
+ 70%|¨€¨€¨€¨€¨€¨€¨€   | 140/200 [00:42<00:26,  2.26it/s]
+ 70%|¨€¨€¨€¨€¨€¨€¨€   | 141/200 [00:43<00:24,  2.40it/s]
+ 71%|¨€¨€¨€¨€¨€¨€¨€   | 142/200 [00:43<00:22,  2.54it/s]
+ 72%|¨€¨€¨€¨€¨€¨€¨€¨‡  | 143/200 [00:43<00:21,  2.66it/s]
+ 72%|¨€¨€¨€¨€¨€¨€¨€¨‡  | 144/200 [00:44<00:20,  2.75it/s]
+ 73%|¨€¨€¨€¨€¨€¨€¨€¨†  | 146/200 [00:44<00:18,  2.90it/s]
+ 74%|¨€¨€¨€¨€¨€¨€¨€¨†  | 147/200 [00:45<00:18,  2.93it/s]
+ 74%|¨€¨€¨€¨€¨€¨€¨€¨…  | 149/200 [00:45<00:13,  3.72it/s]
+ 76%|¨€¨€¨€¨€¨€¨€¨€¨„  | 151/200 [00:46<00:16,  3.03it/s]
+ 76%|¨€¨€¨€¨€¨€¨€¨€¨„  | 152/200 [00:46<00:15,  3.09it/s]
+ 76%|¨€¨€¨€¨€¨€¨€¨€¨ƒ  | 153/200 [00:48<00:30,  1.56it/s]
+ 77%|¨€¨€¨€¨€¨€¨€¨€¨ƒ  | 154/200 [00:50<00:50,  1.09s/it]
+ 78%|¨€¨€¨€¨€¨€¨€¨€¨‚  | 156/200 [00:51<00:31,  1.40it/s]
+ 79%|¨€¨€¨€¨€¨€¨€¨€¨  | 158/200 [00:51<00:21,  1.95it/s]
+ 80%|¨€¨€¨€¨€¨€¨€¨€¨  | 159/200 [00:52<00:22,  1.80it/s]
+ 80%|¨€¨€¨€¨€¨€¨€¨€¨€  | 160/200 [00:52<00:20,  1.97it/s]
+ 80%|¨€¨€¨€¨€¨€¨€¨€¨€  | 161/200 [00:52<00:17,  2.21it/s]
+ 81%|¨€¨€¨€¨€¨€¨€¨€¨€  | 162/200 [00:53<00:16,  2.35it/s]
+ 82%|¨€¨€¨€¨€¨€¨€¨€¨€¨‡ | 164/200 [00:54<00:16,  2.14it/s]
+ 82%|¨€¨€¨€¨€¨€¨€¨€¨€¨† | 165/200 [00:55<00:19,  1.82it/s]
+ 83%|¨€¨€¨€¨€¨€¨€¨€¨€¨† | 166/200 [00:56<00:22,  1.50it/s]
+ 84%|¨€¨€¨€¨€¨€¨€¨€¨€¨† | 167/200 [00:56<00:19,  1.72it/s]
+ 84%|¨€¨€¨€¨€¨€¨€¨€¨€¨… | 168/200 [00:56<00:16,  1.97it/s]
+ 84%|¨€¨€¨€¨€¨€¨€¨€¨€¨… | 169/200 [00:57<00:17,  1.80it/s]
+ 85%|¨€¨€¨€¨€¨€¨€¨€¨€¨„ | 170/200 [00:58<00:22,  1.35it/s]
+ 86%|¨€¨€¨€¨€¨€¨€¨€¨€¨„ | 172/200 [00:58<00:12,  2.24it/s]
+ 86%|¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ | 173/200 [00:59<00:10,  2.50it/s]
+ 87%|¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ | 174/200 [00:59<00:09,  2.85it/s]
+ 88%|¨€¨€¨€¨€¨€¨€¨€¨€¨‚ | 175/200 [00:59<00:07,  3.21it/s]
+ 88%|¨€¨€¨€¨€¨€¨€¨€¨€¨‚ | 176/200 [00:59<00:07,  3.40it/s]
+ 88%|¨€¨€¨€¨€¨€¨€¨€¨€¨‚ | 177/200 [01:00<00:11,  2.03it/s]
+ 89%|¨€¨€¨€¨€¨€¨€¨€¨€¨ | 178/200 [01:01<00:14,  1.57it/s]
+ 90%|¨€¨€¨€¨€¨€¨€¨€¨€¨ | 179/200 [01:02<00:14,  1.49it/s]
+ 90%|¨€¨€¨€¨€¨€¨€¨€¨€¨€ | 181/200 [01:02<00:08,  2.17it/s]
+ 91%|¨€¨€¨€¨€¨€¨€¨€¨€¨€ | 182/200 [01:03<00:08,  2.13it/s]
+ 92%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨‡| 183/200 [01:03<00:08,  2.11it/s]
+ 92%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨‡| 184/200 [01:04<00:08,  1.83it/s]
+ 92%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨†| 185/200 [01:06<00:13,  1.07it/s]
+ 93%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨†| 186/200 [01:07<00:13,  1.06it/s]
+ 94%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨†| 187/200 [01:08<00:10,  1.24it/s]
+ 94%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨…| 188/200 [01:08<00:08,  1.41it/s]
+ 94%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨…| 189/200 [01:08<00:06,  1.63it/s]
+ 95%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨„| 190/200 [01:09<00:05,  1.75it/s]
+ 96%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨„| 191/200 [01:10<00:07,  1.25it/s]
+ 96%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨„| 192/200 [01:11<00:06,  1.25it/s]
+ 96%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ| 193/200 [01:11<00:04,  1.46it/s]
+ 98%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨‚| 195/200 [01:16<00:07,  1.49s/it]
+ 98%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨‚| 196/200 [01:17<00:05,  1.26s/it]
+ 98%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨‚| 197/200 [01:17<00:02,  1.02it/s]
+ 99%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨| 198/200 [01:19<00:02,  1.22s/it]
+100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨| 199/200 [01:21<00:01,  1.33s/it]
+100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 200/200 [01:21<00:00,  1.03s/it]
+100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 200/200 [01:21<00:00,  2.46it/s]
+============ Serving Benchmark Result ============
+Successful requests:                     200       
+Benchmark duration (s):                  81.37     
+Total input tokens:                      43560     
+Total generated tokens:                  44697     
+Request throughput (req/s):              2.46      
+Output token throughput (tok/s):         549.32    
+Total Token throughput (tok/s):          1084.67   
+---------------Time to First Token----------------
+Mean TTFT (ms):                          248.52    
+Median TTFT (ms):                        219.43    
+P99 TTFT (ms):                           754.09    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          317.57    
+Median TPOT (ms):                        153.47    
+P99 TPOT (ms):                           1677.38   
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           386.92    
+Median ITL (ms):                         325.80    
+P99 ITL (ms):                            2099.18   
+==================================================

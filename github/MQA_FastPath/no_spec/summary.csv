@@ -1,0 +1,2 @@
+suite,k,status,throughput_tps,mean_tpot_ms,mean_itl_ms,mqa_mode,supports_gpu_multi_step,fastpath_hit_rate,scoring_time_ms,verification_time_ms,base_worker_total_ms|base_runner_total_ms
+NO_SPEC,0,OK,706.73,139.53,92.72,UNKNOWN,,,,,|60.40

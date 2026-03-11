@@ -1,0 +1,262 @@
+INFO 03-11 16:35:14 [patch_spec_decode_worker.py:188] [Speculative Decoding] MQA scorer backend capability detected (backend=ASCEND, capability=ASCEND,FLASH_ATTN).
+INFO 03-11 16:35:26 [spec_decode_worker.py:478] [Speculative Decoding] Use MQA scorer for scoring proposals.
+INFO 03-11 16:36:22 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=36.27 scoring_time_ms=52.14 verification_time_ms=3.64
+INFO 03-11 16:36:24 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.3421 accept_with_hs=0.0000 accept_no_hs=0.3421 throughput_tps=0.202 iter_p95=214.590
+INFO 03-11 16:36:25 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.4219 accept_with_hs=0.0000 accept_no_hs=0.4219 throughput_tps=0.409 iter_p95=214.590
+INFO 03-11 16:36:26 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.8] waste_ratio=0.1000
+INFO 03-11 16:36:27 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.5357 accept_with_hs=0.0000 accept_no_hs=0.5357 throughput_tps=0.668 iter_p95=212.389
+INFO 03-11 16:36:27 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.000, System efficiency: 0.200, Number of speculative tokens: 4, Number of accepted tokens: 0, Number of draft tokens: 4, Number of emitted tokens: 1.
+INFO 03-11 16:36:27 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=38.69 scoring_time_ms=55.32 verification_time_ms=3.46
+INFO 03-11 16:36:27 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.75] waste_ratio=0.1250
+INFO 03-11 16:36:28 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.5962 accept_with_hs=0.0000 accept_no_hs=0.5962 throughput_tps=0.901 iter_p95=212.389
+INFO 03-11 16:36:29 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7667] waste_ratio=0.1167
+INFO 03-11 16:36:29 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.6371 accept_with_hs=0.0000 accept_no_hs=0.6371 throughput_tps=1.125 iter_p95=211.986
+INFO 03-11 16:36:30 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.75] waste_ratio=0.1250
+INFO 03-11 16:36:31 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.6806 accept_with_hs=0.0000 accept_no_hs=0.6806 throughput_tps=1.368 iter_p95=211.986
+INFO 03-11 16:36:32 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.211, System efficiency: 0.385, Number of speculative tokens: 2, Number of accepted tokens: 19, Number of draft tokens: 90, Number of emitted tokens: 52.
+INFO 03-11 16:36:34 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.7456] waste_ratio=0.1272
+INFO 03-11 16:36:34 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=44.90 scoring_time_ms=61.41 verification_time_ms=7.43
+INFO 03-11 16:36:37 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.299, System efficiency: 0.491, Number of speculative tokens: 2, Number of accepted tokens: 58, Number of draft tokens: 194, Number of emitted tokens: 143.
+INFO 03-11 16:36:41 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.4811 accept_with_hs=0.0000 accept_no_hs=0.4811 throughput_tps=7.291 iter_p95=212.389
+INFO 03-11 16:36:43 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=55.79 scoring_time_ms=84.39 verification_time_ms=17.16
+INFO 03-11 16:36:47 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.5143 accept_with_hs=0.0000 accept_no_hs=0.5143 throughput_tps=28.848 iter_p95=242.743
+INFO 03-11 16:36:47 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.0508] waste_ratio=0.4746
+INFO 03-11 16:36:48 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.067, System efficiency: 0.329, Number of speculative tokens: 2, Number of accepted tokens: 83, Number of draft tokens: 1245, Number of emitted tokens: 614.
+INFO 03-11 16:36:48 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=57.54 scoring_time_ms=82.04 verification_time_ms=17.39
+INFO 03-11 16:36:51 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.5477 accept_with_hs=0.0000 accept_no_hs=0.5477 throughput_tps=49.803 iter_p95=244.158
+INFO 03-11 16:36:51 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.239] waste_ratio=0.3805
+INFO 03-11 16:36:53 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.058, System efficiency: 0.346, Number of speculative tokens: 2, Number of accepted tokens: 287, Number of draft tokens: 4921, Number of emitted tokens: 2557.
+INFO 03-11 16:36:53 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.5843 accept_with_hs=0.0000 accept_no_hs=0.5843 throughput_tps=69.458 iter_p95=244.158
+INFO 03-11 16:36:54 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=56.04 scoring_time_ms=70.22 verification_time_ms=13.99
+INFO 03-11 16:36:54 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.3149] waste_ratio=0.3426
+INFO 03-11 16:36:56 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.6080 accept_with_hs=0.0000 accept_no_hs=0.6080 throughput_tps=87.288 iter_p95=243.512
+INFO 03-11 16:36:57 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.3498] waste_ratio=0.3251
+INFO 03-11 16:36:58 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.208, System efficiency: 0.444, Number of speculative tokens: 2, Number of accepted tokens: 2329, Number of draft tokens: 11210, Number of emitted tokens: 7467.
+INFO 03-11 16:36:59 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.6359 accept_with_hs=0.0000 accept_no_hs=0.6359 throughput_tps=105.073 iter_p95=243.512
+INFO 03-11 16:36:59 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.4362] waste_ratio=0.2819
+INFO 03-11 16:36:59 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=63.66 scoring_time_ms=75.01 verification_time_ms=11.31
+INFO 03-11 16:37:01 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.6796 accept_with_hs=0.0000 accept_no_hs=0.6796 throughput_tps=127.623 iter_p95=265.829
+INFO 03-11 16:37:03 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.311, System efficiency: 0.520, Number of speculative tokens: 2, Number of accepted tokens: 5182, Number of draft tokens: 16658, Number of emitted tokens: 12995.
+INFO 03-11 16:37:04 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.7192 accept_with_hs=0.0000 accept_no_hs=0.7192 throughput_tps=150.031 iter_p95=273.287
+INFO 03-11 16:37:05 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=56.83 scoring_time_ms=70.51 verification_time_ms=13.64
+INFO 03-11 16:37:06 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 1.0, 1.0] waste_ratio=0.0000
+INFO 03-11 16:37:07 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.7511 accept_with_hs=0.0000 accept_no_hs=0.7511 throughput_tps=171.826 iter_p95=271.773
+INFO 03-11 16:37:08 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.464, System efficiency: 0.611, Number of speculative tokens: 3, Number of accepted tokens: 10183, Number of draft tokens: 21927, Number of emitted tokens: 20086.
+INFO 03-11 16:37:10 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=54.52 scoring_time_ms=79.30 verification_time_ms=15.58
+INFO 03-11 16:37:11 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.7768 accept_with_hs=0.0000 accept_no_hs=0.7768 throughput_tps=192.399 iter_p95=306.436
+INFO 03-11 16:37:13 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.565, System efficiency: 0.660, Number of speculative tokens: 4, Number of accepted tokens: 15242, Number of draft tokens: 26989, Number of emitted tokens: 26722.
+INFO 03-11 16:37:14 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.7969 accept_with_hs=0.0000 accept_no_hs=0.7969 throughput_tps=210.818 iter_p95=296.363
+INFO 03-11 16:37:16 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=52.58 scoring_time_ms=69.13 verification_time_ms=13.73
+INFO 03-11 16:37:17 [spec_decode_worker.py:1266] P1P2 k=4 step_accept=[1.0, 1.0, 1.0, 1.0] waste_ratio=0.0000
+INFO 03-11 16:37:17 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8074 accept_with_hs=0.0000 accept_no_hs=0.8074 throughput_tps=222.851 iter_p95=309.457
+INFO 03-11 16:37:19 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.622, System efficiency: 0.683, Number of speculative tokens: 4, Number of accepted tokens: 19357, Number of draft tokens: 31104, Number of emitted tokens: 31883.
+INFO 03-11 16:37:19 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.6865] waste_ratio=0.1567
+INFO 03-11 16:37:19 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8097 accept_with_hs=0.0000 accept_no_hs=0.8097 throughput_tps=227.388 iter_p95=306.436
+INFO 03-11 16:37:21 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=51.53 scoring_time_ms=60.74 verification_time_ms=6.96
+INFO 03-11 16:37:21 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.8433] waste_ratio=0.0784
+INFO 03-11 16:37:22 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8154 accept_with_hs=0.0000 accept_no_hs=0.8154 throughput_tps=231.989 iter_p95=306.436
+INFO 03-11 16:37:24 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.645, System efficiency: 0.698, Number of speculative tokens: 2, Number of accepted tokens: 22185, Number of draft tokens: 34409, Number of emitted tokens: 36005.
+INFO 03-11 16:37:24 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8190 accept_with_hs=0.0000 accept_no_hs=0.8190 throughput_tps=235.042 iter_p95=306.436
+INFO 03-11 16:37:26 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.9278, 0.9278] waste_ratio=0.0481
+INFO 03-11 16:37:26 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=49.05 scoring_time_ms=88.19 verification_time_ms=8.15
+INFO 03-11 16:37:27 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8247 accept_with_hs=0.0000 accept_no_hs=0.8247 throughput_tps=239.085 iter_p95=309.457
+INFO 03-11 16:37:29 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.664, System efficiency: 0.711, Number of speculative tokens: 3, Number of accepted tokens: 24389, Number of draft tokens: 36707, Number of emitted tokens: 39148.
+INFO 03-11 16:37:30 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8298 accept_with_hs=0.0000 accept_no_hs=0.8298 throughput_tps=241.002 iter_p95=318.804
+INFO 03-11 16:37:32 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=71.10 scoring_time_ms=61.00 verification_time_ms=9.27
+INFO 03-11 16:37:34 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8292 accept_with_hs=0.0000 accept_no_hs=0.8292 throughput_tps=239.936 iter_p95=320.047
+INFO 03-11 16:37:34 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.680, System efficiency: 0.718, Number of speculative tokens: 4, Number of accepted tokens: 26137, Number of draft tokens: 38455, Number of emitted tokens: 41411.
+INFO 03-11 16:37:36 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.4583] waste_ratio=0.2708
+INFO 03-11 16:37:36 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8278 accept_with_hs=0.0000 accept_no_hs=0.8278 throughput_tps=237.819 iter_p95=319.222
+INFO 03-11 16:37:37 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=72.27 scoring_time_ms=90.25 verification_time_ms=6.11
+INFO 03-11 16:37:39 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8264 accept_with_hs=0.0000 accept_no_hs=0.8264 throughput_tps=235.618 iter_p95=319.222
+INFO 03-11 16:37:39 [spec_decode_worker.py:1266] P1P2 k=2 step_accept=[1.0, 0.4242] waste_ratio=0.2879
+INFO 03-11 16:37:39 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.673, System efficiency: 0.714, Number of speculative tokens: 2, Number of accepted tokens: 26633, Number of draft tokens: 39545, Number of emitted tokens: 42357.
+INFO 03-11 16:37:42 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8265 accept_with_hs=0.0000 accept_no_hs=0.8265 throughput_tps=233.522 iter_p95=319.222
+INFO 03-11 16:37:43 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.9038, 0.8966] waste_ratio=0.0665
+INFO 03-11 16:37:43 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=69.66 scoring_time_ms=88.99 verification_time_ms=5.97
+INFO 03-11 16:37:45 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.674, System efficiency: 0.714, Number of speculative tokens: 3, Number of accepted tokens: 27215, Number of draft tokens: 40406, Number of emitted tokens: 43260.
+INFO 03-11 16:37:45 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8282 accept_with_hs=0.0000 accept_no_hs=0.8282 throughput_tps=231.502 iter_p95=319.222
+INFO 03-11 16:37:46 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.9519, 0.9483] waste_ratio=0.0333
+INFO 03-11 16:37:48 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8292 accept_with_hs=0.0000 accept_no_hs=0.8292 throughput_tps=228.802 iter_p95=319.099
+INFO 03-11 16:37:48 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.9679, 0.9655] waste_ratio=0.0222
+INFO 03-11 16:37:48 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=46.05 scoring_time_ms=59.04 verification_time_ms=5.39
+INFO 03-11 16:37:50 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.678, System efficiency: 0.716, Number of speculative tokens: 3, Number of accepted tokens: 27797, Number of draft tokens: 40988, Number of emitted tokens: 44036.
+INFO 03-11 16:37:50 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8298 accept_with_hs=0.0000 accept_no_hs=0.8298 throughput_tps=225.725 iter_p95=319.099
+INFO 03-11 16:37:51 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.9759, 0.9742] waste_ratio=0.0166
+INFO 03-11 16:37:53 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8303 accept_with_hs=0.0000 accept_no_hs=0.8303 throughput_tps=221.923 iter_p95=320.973
+INFO 03-11 16:37:54 [spec_decode_worker.py:1596] SpecDecodeWorker stage times: average_time_per_proposal_tok_ms=73.96 scoring_time_ms=93.50 verification_time_ms=6.40
+INFO 03-11 16:37:54 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.9808, 0.9793] waste_ratio=0.0133
+INFO 03-11 16:37:55 [metrics.py:439] Speculative metrics: Draft acceptance rate: 0.680, System efficiency: 0.717, Number of speculative tokens: 3, Number of accepted tokens: 28022, Number of draft tokens: 41213, Number of emitted tokens: 44336.
+INFO 03-11 16:37:56 [spec_decode_worker.py:1217] ALIGN P1/P2 hs_ratio=0.0000 accept=0.8308 accept_with_hs=0.0000 accept_no_hs=0.8308 throughput_tps=218.481 iter_p95=322.444
+INFO 03-11 16:37:57 [spec_decode_worker.py:1266] P1P2 k=3 step_accept=[1.0, 0.984, 0.9828] waste_ratio=0.0111
+INFO 03-11 16:35:38 [importing.py:17] Triton not installed or not compatible; certain GPU-related functions will not be available.
+WARNING 03-11 16:35:38 [importing.py:29] Triton is not installed. Using dummy decorators. Install it via `pip install triton` to enable kernel compilation.
+INFO 03-11 16:35:39 [__init__.py:39] Available plugins for group vllm.platform_plugins:
+INFO 03-11 16:35:39 [__init__.py:41] - ascend -> vllm_ascend:register
+INFO 03-11 16:35:39 [__init__.py:44] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 03-11 16:35:39 [__init__.py:235] Platform plugin ascend is activated
+WARNING 03-11 16:35:43 [_custom_ops.py:22] Failed to import from vllm._C with ImportError('/root/miniconda3/envs/lxc/lib/python3.10/site-packages/vllm/_C.abi3.so: undefined symbol: _ZN3c108ListType3getERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS_4Type24SingletonOrSharedTypePtrIS9_EE')
+WARNING 03-11 16:35:49 [registry.py:401] Model architecture DeepSeekMTPModel is already registered, and will be overwritten by the new model class vllm_ascend.models.deepseek_mtp:CustomDeepSeekMTP.
+WARNING 03-11 16:35:49 [registry.py:401] Model architecture Qwen2ForCausalLM is already registered, and will be overwritten by the new model class vllm_ascend.models.qwen2:CustomQwen2ForCausalLM.
+WARNING 03-11 16:35:49 [registry.py:401] Model architecture Qwen2VLForConditionalGeneration is already registered, and will be overwritten by the new model class vllm_ascend.models.qwen2_vl:AscendQwen2VLForConditionalGeneration.
+WARNING 03-11 16:35:49 [registry.py:401] Model architecture Qwen2_5_VLForConditionalGeneration is already registered, and will be overwritten by the new model class vllm_ascend.models.qwen2_5_vl:AscendQwen2_5_VLForConditionalGeneration.
+WARNING 03-11 16:35:49 [registry.py:401] Model architecture DeepseekV2ForCausalLM is already registered, and will be overwritten by the new model class vllm_ascend.models.deepseek_v2:CustomDeepseekV2ForCausalLM.
+WARNING 03-11 16:35:49 [registry.py:401] Model architecture DeepseekV3ForCausalLM is already registered, and will be overwritten by the new model class vllm_ascend.models.deepseek_v2:CustomDeepseekV3ForCausalLM.
+WARNING 03-11 16:35:49 [registry.py:401] Model architecture Qwen3MoeForCausalLM is already registered, and will be overwritten by the new model class vllm_ascend.models.qwen3_moe:CustomQwen3MoeForCausalLM.
+WARNING 03-11 16:35:49 [registry.py:401] Model architecture Qwen3ForCausalLM is already registered, and will be overwritten by the new model class vllm_ascend.models.qwen3:CustomQwen3ForCausalLM.
+INFO 03-11 16:35:50 [config.py:1980] Disabled the custom all-reduce kernel because it is not supported on current platform.
+INFO 03-11 16:35:52 [config.py:1980] Disabled the custom all-reduce kernel because it is not supported on current platform.
+INFO 03-11 16:35:53 [config.py:1980] Disabled the custom all-reduce kernel because it is not supported on current platform.
+INFO 03-11 16:35:54 [config.py:1980] Disabled the custom all-reduce kernel because it is not supported on current platform.
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0xfffbf845b490>, endpoint_type='vllm', label=None, base_url='http://127.0.0.1:8000', host='127.0.0.1', port=8000, endpoint='/v1/completions', dataset_name='sharegpt', dataset_path='/mnt/ky2307909/siyuan.tong/dataset/ShareGPT_V3_unfiltered_cleaned_split.json', max_concurrency=None, model='qwen3-8B', tokenizer='/mnt/ky2307909/siyuan.tong/Qwen3-8B', use_beam_search=False, num_prompts=200, logprobs=None, request_rate=16.0, burstiness=1.0, seed=0, trust_remote_code=True, disable_tqdm=False, profile=False, save_result=False, save_detailed=False, append_result=False, metadata=None, result_dir=None, result_filename=None, ignore_eos=False, percentile_metrics='ttft,tpot,itl', metric_percentiles='99', goodput=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, random_input_len=1024, random_output_len=128, random_range_ratio=0.0, random_prefix_len=0, hf_subset=None, hf_split=None, hf_output_len=None, top_p=None, top_k=None, min_p=None, temperature=None, tokenizer_mode='auto', served_model_name=None, lora_modules=None)
+Starting initial single prompt test run...
+Initial test run completed. Starting main benchmark run...
+Traffic request rate: 16.0
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: None
+
+  0%|          | 0/200 [00:00<?, ?it/s]
+  0%|          | 1/200 [00:02<06:39,  2.01s/it]
+  1%|          | 2/200 [00:05<10:10,  3.08s/it]
+  2%|¨‡         | 3/200 [00:06<07:08,  2.17s/it]
+  2%|¨‡         | 4/200 [00:10<08:15,  2.53s/it]
+  4%|¨†         | 7/200 [00:13<05:26,  1.69s/it]
+  4%|¨…         | 9/200 [00:13<03:32,  1.11s/it]
+  6%|¨„         | 11/200 [00:14<02:26,  1.29it/s]
+  6%|¨ƒ         | 13/200 [00:14<01:45,  1.77it/s]
+  8%|¨‚         | 16/200 [00:14<01:08,  2.69it/s]
+ 10%|¨         | 19/200 [00:15<00:48,  3.75it/s]
+ 12%|¨€¨‡        | 23/200 [00:15<00:32,  5.42it/s]
+ 12%|¨€¨†        | 25/200 [00:17<00:59,  2.94it/s]
+ 15%|¨€¨„        | 30/200 [00:17<00:37,  4.55it/s]
+ 16%|¨€¨ƒ        | 33/200 [00:17<00:35,  4.72it/s]
+ 20%|¨€¨        | 39/200 [00:18<00:22,  7.23it/s]
+ 20%|¨€¨€        | 41/200 [00:18<00:22,  7.15it/s]
+ 22%|¨€¨€¨‡       | 43/200 [00:18<00:22,  7.13it/s]
+ 22%|¨€¨€¨‡       | 44/200 [00:19<00:24,  6.30it/s]
+ 24%|¨€¨€¨…       | 48/200 [00:19<00:17,  8.51it/s]
+ 25%|¨€¨€¨„       | 50/200 [00:19<00:18,  8.30it/s]
+ 26%|¨€¨€¨„       | 52/200 [00:19<00:17,  8.24it/s]
+ 28%|¨€¨€¨‚       | 55/200 [00:20<00:24,  5.90it/s]
+ 28%|¨€¨€¨‚       | 57/200 [00:20<00:22,  6.28it/s]
+ 30%|¨€¨€¨       | 59/200 [00:21<00:21,  6.65it/s]
+ 30%|¨€¨€¨€       | 61/200 [00:22<00:48,  2.86it/s]
+ 32%|¨€¨€¨€¨‡      | 63/200 [00:23<00:39,  3.48it/s]
+ 33%|¨€¨€¨€¨†      | 66/200 [00:23<00:28,  4.72it/s]
+ 34%|¨€¨€¨€¨…      | 68/200 [00:23<00:25,  5.28it/s]
+ 35%|¨€¨€¨€¨„      | 70/200 [00:23<00:22,  5.81it/s]
+ 36%|¨€¨€¨€¨„      | 71/200 [00:24<00:39,  3.27it/s]
+ 36%|¨€¨€¨€¨„      | 72/200 [00:25<00:37,  3.39it/s]
+ 36%|¨€¨€¨€¨ƒ      | 73/200 [00:25<00:36,  3.49it/s]
+ 37%|¨€¨€¨€¨ƒ      | 74/200 [00:25<00:35,  3.60it/s]
+ 38%|¨€¨€¨€¨‚      | 75/200 [00:25<00:34,  3.65it/s]
+ 38%|¨€¨€¨€¨‚      | 76/200 [00:26<00:33,  3.74it/s]
+ 38%|¨€¨€¨€¨‚      | 77/200 [00:26<00:32,  3.81it/s]
+ 39%|¨€¨€¨€¨      | 78/200 [00:27<00:49,  2.47it/s]
+ 41%|¨€¨€¨€¨€      | 82/200 [00:27<00:23,  5.07it/s]
+ 42%|¨€¨€¨€¨€¨‡     | 84/200 [00:27<00:25,  4.62it/s]
+ 42%|¨€¨€¨€¨€¨†     | 85/200 [00:29<00:42,  2.68it/s]
+ 44%|¨€¨€¨€¨€¨…     | 88/200 [00:30<00:42,  2.61it/s]
+ 46%|¨€¨€¨€¨€¨„     | 91/200 [00:30<00:29,  3.73it/s]
+ 46%|¨€¨€¨€¨€¨„     | 92/200 [00:30<00:28,  3.74it/s]
+ 46%|¨€¨€¨€¨€¨ƒ     | 93/200 [00:31<00:28,  3.76it/s]
+ 48%|¨€¨€¨€¨€¨‚     | 95/200 [00:31<00:24,  4.33it/s]
+ 48%|¨€¨€¨€¨€¨‚     | 97/200 [00:32<00:26,  3.85it/s]
+ 49%|¨€¨€¨€¨€¨     | 98/200 [00:32<00:27,  3.73it/s]
+ 50%|¨€¨€¨€¨€¨     | 99/200 [00:32<00:28,  3.59it/s]
+ 50%|¨€¨€¨€¨€¨€     | 100/200 [00:33<00:35,  2.79it/s]
+ 52%|¨€¨€¨€¨€¨€¨‡    | 104/200 [00:33<00:18,  5.07it/s]
+ 52%|¨€¨€¨€¨€¨€¨†    | 105/200 [00:33<00:20,  4.65it/s]
+ 53%|¨€¨€¨€¨€¨€¨†    | 106/200 [00:34<00:27,  3.46it/s]
+ 54%|¨€¨€¨€¨€¨€¨…    | 108/200 [00:35<00:26,  3.41it/s]
+ 55%|¨€¨€¨€¨€¨€¨„    | 110/200 [00:35<00:21,  4.10it/s]
+ 56%|¨€¨€¨€¨€¨€¨ƒ    | 113/200 [00:35<00:15,  5.47it/s]
+ 57%|¨€¨€¨€¨€¨€¨ƒ    | 114/200 [00:35<00:17,  4.92it/s]
+ 58%|¨€¨€¨€¨€¨€¨‚    | 117/200 [00:36<00:13,  5.97it/s]
+ 59%|¨€¨€¨€¨€¨€¨    | 118/200 [00:37<00:21,  3.90it/s]
+ 60%|¨€¨€¨€¨€¨€¨€    | 120/200 [00:37<00:18,  4.36it/s]
+ 62%|¨€¨€¨€¨€¨€¨€¨‡   | 123/200 [00:37<00:16,  4.69it/s]
+ 62%|¨€¨€¨€¨€¨€¨€¨‡   | 124/200 [00:38<00:20,  3.67it/s]
+ 62%|¨€¨€¨€¨€¨€¨€¨†   | 125/200 [00:38<00:21,  3.45it/s]
+ 64%|¨€¨€¨€¨€¨€¨€¨†   | 127/200 [00:39<00:18,  3.99it/s]
+ 64%|¨€¨€¨€¨€¨€¨€¨…   | 128/200 [00:39<00:19,  3.75it/s]
+ 65%|¨€¨€¨€¨€¨€¨€¨„   | 130/200 [00:41<00:32,  2.16it/s]
+ 66%|¨€¨€¨€¨€¨€¨€¨„   | 132/200 [00:41<00:23,  2.84it/s]
+ 66%|¨€¨€¨€¨€¨€¨€¨ƒ   | 133/200 [00:41<00:23,  2.88it/s]
+ 67%|¨€¨€¨€¨€¨€¨€¨ƒ   | 134/200 [00:42<00:27,  2.42it/s]
+ 68%|¨€¨€¨€¨€¨€¨€¨‚   | 135/200 [00:43<00:39,  1.65it/s]
+ 68%|¨€¨€¨€¨€¨€¨€¨‚   | 136/200 [00:43<00:34,  1.87it/s]
+ 68%|¨€¨€¨€¨€¨€¨€¨‚   | 137/200 [00:44<00:30,  2.07it/s]
+ 70%|¨€¨€¨€¨€¨€¨€¨   | 139/200 [00:44<00:25,  2.41it/s]
+ 70%|¨€¨€¨€¨€¨€¨€¨€   | 140/200 [00:45<00:28,  2.14it/s]
+ 71%|¨€¨€¨€¨€¨€¨€¨€   | 142/200 [00:46<00:26,  2.21it/s]
+ 72%|¨€¨€¨€¨€¨€¨€¨€¨‡  | 143/200 [00:46<00:25,  2.25it/s]
+ 72%|¨€¨€¨€¨€¨€¨€¨€¨‡  | 144/200 [00:47<00:27,  2.07it/s]
+ 72%|¨€¨€¨€¨€¨€¨€¨€¨†  | 145/200 [00:47<00:22,  2.42it/s]
+ 73%|¨€¨€¨€¨€¨€¨€¨€¨†  | 146/200 [00:48<00:25,  2.14it/s]
+ 74%|¨€¨€¨€¨€¨€¨€¨€¨†  | 147/200 [00:48<00:20,  2.52it/s]
+ 74%|¨€¨€¨€¨€¨€¨€¨€¨…  | 149/200 [00:48<00:13,  3.73it/s]
+ 75%|¨€¨€¨€¨€¨€¨€¨€¨„  | 150/200 [00:49<00:20,  2.49it/s]
+ 76%|¨€¨€¨€¨€¨€¨€¨€¨„  | 151/200 [00:50<00:22,  2.20it/s]
+ 76%|¨€¨€¨€¨€¨€¨€¨€¨ƒ  | 153/200 [00:50<00:16,  2.87it/s]
+ 77%|¨€¨€¨€¨€¨€¨€¨€¨ƒ  | 154/200 [00:50<00:14,  3.18it/s]
+ 78%|¨€¨€¨€¨€¨€¨€¨€¨‚  | 155/200 [00:51<00:13,  3.28it/s]
+ 78%|¨€¨€¨€¨€¨€¨€¨€¨‚  | 156/200 [00:52<00:23,  1.89it/s]
+ 78%|¨€¨€¨€¨€¨€¨€¨€¨‚  | 157/200 [00:52<00:22,  1.87it/s]
+ 79%|¨€¨€¨€¨€¨€¨€¨€¨  | 158/200 [00:53<00:19,  2.17it/s]
+ 80%|¨€¨€¨€¨€¨€¨€¨€¨  | 159/200 [00:53<00:20,  1.97it/s]
+ 80%|¨€¨€¨€¨€¨€¨€¨€¨€  | 160/200 [00:54<00:18,  2.17it/s]
+ 81%|¨€¨€¨€¨€¨€¨€¨€¨€  | 162/200 [00:54<00:11,  3.25it/s]
+ 82%|¨€¨€¨€¨€¨€¨€¨€¨€¨‡ | 163/200 [00:54<00:13,  2.73it/s]
+ 82%|¨€¨€¨€¨€¨€¨€¨€¨€¨‡ | 164/200 [00:55<00:14,  2.44it/s]
+ 82%|¨€¨€¨€¨€¨€¨€¨€¨€¨† | 165/200 [00:55<00:12,  2.74it/s]
+ 83%|¨€¨€¨€¨€¨€¨€¨€¨€¨† | 166/200 [00:56<00:14,  2.41it/s]
+ 84%|¨€¨€¨€¨€¨€¨€¨€¨€¨† | 167/200 [00:56<00:12,  2.54it/s]
+ 84%|¨€¨€¨€¨€¨€¨€¨€¨€¨… | 168/200 [00:57<00:15,  2.12it/s]
+ 84%|¨€¨€¨€¨€¨€¨€¨€¨€¨… | 169/200 [00:57<00:13,  2.30it/s]
+ 85%|¨€¨€¨€¨€¨€¨€¨€¨€¨„ | 170/200 [00:58<00:16,  1.82it/s]
+ 86%|¨€¨€¨€¨€¨€¨€¨€¨€¨„ | 171/200 [00:59<00:18,  1.60it/s]
+ 86%|¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ | 173/200 [00:59<00:11,  2.31it/s]
+ 87%|¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ | 174/200 [00:59<00:11,  2.34it/s]
+ 88%|¨€¨€¨€¨€¨€¨€¨€¨€¨‚ | 175/200 [01:00<00:09,  2.51it/s]
+ 88%|¨€¨€¨€¨€¨€¨€¨€¨€¨‚ | 176/200 [01:01<00:17,  1.35it/s]
+ 89%|¨€¨€¨€¨€¨€¨€¨€¨€¨ | 178/200 [01:02<00:14,  1.57it/s]
+ 90%|¨€¨€¨€¨€¨€¨€¨€¨€¨ | 179/200 [01:06<00:28,  1.34s/it]
+ 90%|¨€¨€¨€¨€¨€¨€¨€¨€¨€ | 181/200 [01:06<00:16,  1.18it/s]
+ 91%|¨€¨€¨€¨€¨€¨€¨€¨€¨€ | 182/200 [01:08<00:19,  1.10s/it]
+ 92%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨‡| 183/200 [01:09<00:16,  1.02it/s]
+ 92%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨†| 185/200 [01:09<00:09,  1.55it/s]
+ 94%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨†| 187/200 [01:12<00:11,  1.09it/s]
+ 94%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨…| 189/200 [01:12<00:07,  1.56it/s]
+ 95%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨„| 190/200 [01:12<00:05,  1.73it/s]
+ 96%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨„| 191/200 [01:13<00:05,  1.56it/s]
+ 96%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨„| 192/200 [01:14<00:05,  1.41it/s]
+ 96%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ| 193/200 [01:15<00:04,  1.46it/s]
+ 97%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨ƒ| 194/200 [01:15<00:03,  1.51it/s]
+ 98%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨‚| 195/200 [01:16<00:03,  1.39it/s]
+ 98%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨‚| 196/200 [01:17<00:02,  1.69it/s]
+ 98%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨‚| 197/200 [01:24<00:08,  2.68s/it]
+ 99%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨| 198/200 [01:25<00:04,  2.18s/it]
+100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨| 199/200 [01:26<00:01,  1.62s/it]
+100%|¨€¨€¨€¨€¨€¨€¨€¨€¨€¨€| 200/200 [01:26<00:00,  2.32it/s]
+============ Serving Benchmark Result ============
+Successful requests:                     200       
+Benchmark duration (s):                  86.20     
+Total input tokens:                      43560     
+Total generated tokens:                  44409     
+Request throughput (req/s):              2.32      
+Output token throughput (tok/s):         515.20    
+Total Token throughput (tok/s):          1020.55   
+---------------Time to First Token----------------
+Mean TTFT (ms):                          267.44    
+Median TTFT (ms):                        245.01    
+P99 TTFT (ms):                           591.52    
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          321.40    
+Median TPOT (ms):                        170.96    
+P99 TPOT (ms):                           1351.73   
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           355.96    
+Median ITL (ms):                         274.86    
+P99 ITL (ms):                            2126.67   
+==================================================

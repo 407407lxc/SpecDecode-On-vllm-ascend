@@ -1,0 +1,7 @@
+suite,k,status,throughput_tps,mean_tpot_ms,mean_itl_ms,mqa_mode,supports_gpu_multi_step,fastpath_hit_rate,scoring_time_ms,verification_time_ms,base_worker_total_ms|base_runner_total_ms
+C_FP_OFF_MQA_ON,2,OK,473.06,316.05,334.03,MQA,False.,,54.69,3.57,|67.64
+C_FP_OFF_MQA_ON,4,OK,493.59,312.44,358.60,MQA,False.,,84.44,5.14,|70.94
+C_FP_OFF_MQA_ON,8,OK,524.13,330.46,381.50,MQA,False.,,58.80,4.96,|70.13
+D_FP_OFF_MQA_OFF,2,OK,400.65,263.80,375.08,BATCH_EXPANSION,False.,,60.01,5.35,|68.63
+D_FP_OFF_MQA_OFF,4,OK,403.54,252.10,396.68,BATCH_EXPANSION,False.,,59.73,5.15,|71.42
+D_FP_OFF_MQA_OFF,8,OK,374.72,259.96,452.66,BATCH_EXPANSION,False.,,54.21,4.84,|70.21

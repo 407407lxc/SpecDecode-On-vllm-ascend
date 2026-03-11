@@ -1,0 +1,16 @@
+[META] date=2026-03-11 19:03:39
+[META] suite=C_FP_OFF_MQA_ON
+[META] k=2
+[META] MODEL_PATH=/mnt/ky2307909/siyuan.tong/Qwen3-8B
+[META] DRAFT_MODEL_PATH=/mnt/ky2307909/siyuan.tong/Qwen3-0-6B
+[META] DATASET_PATH=/mnt/ky2307909/siyuan.tong/dataset/ShareGPT_V3_unfiltered_cleaned_split.json
+[META] HOST=127.0.0.1 PORT=8000
+[META] NUM_PROMPTS=200 REQUEST_RATE=16
+[META] VLLM_ASCEND_SPEC_GPU_MULTI_STEP_BACKENDS=FLASH_ATTN
+[META] VLLM_ASCEND_SPEC_MQA_BACKENDS=FLASH_ATTN,ASCEND
+[META] VLLM_ASCEND_BASE_STAGE_LOG_ENABLE=1
+[META] VLLM_ASCEND_BASE_STAGE_LOG_INTERVAL=50
+[META] VLLM_ASCEND_RUNNER_STAGE_LOG_ENABLE=1
+[META] VLLM_ASCEND_RUNNER_STAGE_LOG_INTERVAL=50
+[META] serve_cmd=vllm serve /mnt/ky2307909/siyuan.tong/Qwen3-8B --gpu-memory-utilization 0.90 --max-model-len 8192 --served-model-name qwen3-8B --trust-remote-code --port 8000 --host 127.0.0.1 --enforce-eager --speculative-config \{\"method\":\"draft_model\"\,\"model\":\"/mnt/ky2307909/siyuan.tong/Qwen3-0-6B\"\,\"num_speculative_tokens\":2\} 
+[META] bench_cmd=vllm bench serve --model qwen3-8B --tokenizer /mnt/ky2307909/siyuan.tong/Qwen3-8B --base-url http://127.0.0.1:8000 --endpoint-type vllm --dataset-name sharegpt --dataset-path /mnt/ky2307909/siyuan.tong/dataset/ShareGPT_V3_unfiltered_cleaned_split.json --num-prompts 200 --request-rate 16 --trust-remote-code 
