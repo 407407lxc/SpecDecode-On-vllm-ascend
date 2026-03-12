@@ -126,30 +126,6 @@
 
 ---
 
-### 3.4 你点名的阶段耗时采集（关键）
-
-你关心的是两层：
-
-1. Worker 调度/准备阶段（`worker_base.py:464`）
-
-   - `prepare_worker_input_ms`
-   - `prepare_model_input_ms`
-   - `execute_worker_ms`
-   - `model_execute_ms`
-2. 模型执行内部阶段（`model_runner.py:1433` 附近）
-
-   - `forward_ms`
-   - `logits_ms`
-   - `sampler_ms`
-
-当前代码状态：
-
-- `vllm-ascend/vllm_ascend/worker/model_runner.py` 已有聚合日志：
-  - `BaseRunner stage times: avg_forward_ms=... avg_logits_ms=... avg_sampler_ms=... avg_execute_total_ms=...`
-- worker 侧你要的四段字段目前在本轮提取表中仍未出现（第 7 节给证据）。
-
----
-
 ## 4. 命中证据矩阵（按提取日志判定）
 
 
@@ -252,3 +228,73 @@
 2. 在 `model_runner.py` 保留现有 `avg_*`，并补别名字段（`forward_ms/logits_ms/sampler_ms`）方便统一解析。
 3. 压测脚本的 key 抽取规则增加上述字段，确保“有日志就能入表”。
 4. 新增一组固定输入长度的对照（短/中/长 prompt）并拆分统计 P50/P95/P99 ITL，定位 no-spec 差距主要集中在哪一段链路。
+
+
+9. 补丁留痕（2.0）
+
+本节记录本轮“链路开销与尾延迟”三项最小补丁，版本标识为 **2.0**。
+
+### 9.1 Patch 2.0-1：Adaptive-K EWMA 热路径门控（默认关闭）
+
+- 缘由：
+  - 在 `spec_decode` 热路径中，`_update_k_ewma()` 每步都会执行 `step_accept.detach().float().cpu()`，会触发 device->host 拷贝。
+  - 当 utility 模式未启用时，这部分 EWMA 数据并不会参与决策，属于纯额外开销。
+- 目的：
+  - 去掉“默认无收益”的每步 CPU 拷贝，减少 ITL 与尾延迟抖动。
+- 逻辑代码：
+  - 文件：`vllm/vllm/spec_decode/spec_decode_worker.py`
+  - 新增开关：`self._adaptive_ewma_enable = self.adaptive_enable_utility or VLLM_ASCEND_ADAPTIVE_EWMA_ENABLE=1`
+  - 调整调用条件：
+    - 由 `if step_accept.numel() > 0:`
+    - 改为 `if step_accept.numel() > 0 and self._adaptive_ewma_enable:`
+- 语义影响：
+  - 当 utility adaptive-k 打开时，行为不变。
+  - 默认 utility 关闭时，仅移除无用 EWMA 更新，不改变 decode 结果。
+
+### 9.2 Patch 2.0-2：补齐 prefill 同步阶段计时（prefill_sync_time_ms）
+
+- 缘由：
+  - 在 speculative 路径中，`prefill_req` 的 proposer 同步执行不在原有 `proposal/scoring/verification` 三段计时内，导致链路分析漏项。
+- 目的：
+  - 把“prefill 同步到 proposer KV”的额外耗时单独暴露，便于解释 spec 与 no-spec 的尾延迟差距。
+- 逻辑代码：
+  - 文件：`vllm/vllm/spec_decode/spec_decode_worker.py`
+  - 在 `_run_speculative_decoding_step()` 中新增：
+    - `prefill_sync_time_ms = 0.0`
+    - `with Timer() as prefill_sync_timer: self.proposer_worker.execute_model(prefill_req)`
+    - `prefill_sync_time_ms = prefill_sync_timer.elapsed_time_ms`
+  - 扩展 stage times：
+    - 从 `(proposal_per_tok_ms, scoring_ms, verification_ms)`
+    - 改为 `(proposal_per_tok_ms, scoring_ms, verification_ms, prefill_sync_ms)`
+  - 扩展日志字段：
+    - `SpecDecodeWorker stage times: ... prefill_sync_time_ms=...`
+- 语义影响：
+  - 仅增加观测与日志，不改变接受/采样逻辑。
+
+### 9.3 Patch 2.0-3：MQA scorer proposal token 懒加载（避免全量 tolist）
+
+- 缘由：
+  - 原实现先做 `all_proposal_tokens = proposals.proposal_token_ids.tolist()`，会把整批 `B x K` 一次性转 Python list。
+  - 在含大量 `proposal_len=0` 或混合请求时，这一步容易产生不必要 CPU 开销。
+- 目的：
+  - 减少 Python 侧物化数据量，降低 scoring 前后的 host 开销与抖动。
+- 逻辑代码：
+  - 文件：`vllm/vllm/spec_decode/mqa_scorer.py`
+  - 保留：`all_proposal_lengths = proposals.proposal_lens.tolist()`
+  - 修改：
+    - 从“全量 `proposal_token_ids.tolist()`”
+    - 改为“按序列按需切片物化”：
+      - `proposal_len = all_proposal_lengths[i]`
+      - `proposal_token_ids = proposal_token_ids_tensor[i, :proposal_len].tolist()`
+- 语义影响：
+  - 仅数据准备路径优化，不改变 proposal/scoring 的数学结果。
+
+### 9.4 2.0 补丁边界说明
+
+- 本轮 2.0 补丁均为“最小可落地”改动：
+  1. 不改 acceptance 算法。
+  2. 不改模型前向计算图。
+  3. 只优化热路径开销与观测完整性。
+- 建议压测日志检索关键字新增：
+  - `prefill_sync_time_ms`
+  - `_adaptive_ewma_enable`（可通过配置打印或运行配置留痕）

@@ -3,6 +3,7 @@
 ## 1. 文档范围说明
 
 这版文档做了两件事：
+
 - 保留并细化“代码改动 + 原理”讲解（不删代码原理部分）。
 - 用 `github/MQA_FastPath/extracted_tables_20260311_234131` 的提取表覆盖实验数据与结论。
 
@@ -13,6 +14,7 @@
 提取目录：`github/MQA_FastPath/extracted_tables_20260311_234131`
 
 核心文件：
+
 - `TABLE_SUMMARY.md`
 - `summary_combined.csv`
 - `bench_metrics.csv`
@@ -25,11 +27,12 @@
 
 ### 2.1 文件规模概览
 
+
 | data_group | file_count | log_count | csv_count | total_size_bytes |
-|---|---:|---:|---:|---:|
-| A&B | 27 | 26 | 1 | 4,233,477 |
-| C&D | 27 | 26 | 1 | 4,157,914 |
-| no_spec | 6 | 5 | 1 | 643,248 |
+| ---------- | ---------: | --------: | --------: | ---------------: |
+| A&B        |         27 |        26 |         1 |        4,233,477 |
+| C&D        |         27 |        26 |         1 |        4,157,914 |
+| no_spec    |          6 |         5 |         1 |          643,248 |
 
 ### 2.2 统一实验配置（来自 meta/probe）
 
@@ -55,11 +58,13 @@
 文件：`vllm/vllm/spec_decode/multi_step_worker.py`
 
 核心判定（语义）：
+
 - 必须是 `TP1DraftModelRunner`。
 - 必须 `supports_gpu_multi_step(expanded_request) == True`。
 - 否则进入 CPU prepare/fallback 路径。
 
 原理：
+
 - FastPath 的本质是把 draft proposal 的“多步准备+执行”尽量放在设备侧连续推进。
 - 任一前置条件不满足，就会回到逐步 prepare（CPU 参与更多）的通路。
 
@@ -68,10 +73,12 @@
 文件：`vllm/vllm/spec_decode/spec_decode_worker.py`
 
 核心分支（语义）：
+
 - `disable_mqa_scorer=True` -> `BatchExpansionTop1Scorer`
 - 否则 -> `MQAScorer`
 
 原理：
+
 - MQA scorer 目标是降低 scoring 阶段的重复计算/扩批成本。
 - 如果能力判定过严或误判，就会被迫走 batch expansion。
 
@@ -82,6 +89,7 @@
 文件：`vllm-ascend/vllm_ascend/patch/worker/patch_common/patch_spec_decode_worker.py`
 
 改动点：
+
 1. 从“后端名字硬编码”升级为“能力接口优先 + allowlist 兜底”。
 2. 保留安全约束（例如长度约束、eager 约束），避免误开。
 3. 增强日志：
@@ -90,6 +98,7 @@
    - `Use batch expansion for scoring proposals.`
 
 原理：
+
 - 先问“能不能”（capability）而不是“你叫什么名字”（backend 名）。
 - 这样 Ascend 即使不是传统 FLASH_ATTN 命名，也能按能力启用 MQA。
 
@@ -98,10 +107,12 @@
 ### 3.3 Ascend 侧改动：GPU multi-step FastPath 判定与探针
 
 文件：
+
 - `vllm-ascend/vllm_ascend/worker/draft_model_runner.py`
 - `vllm-ascend/vllm_ascend/patch/worker/patch_common/patch_multi_step_worker.py`
 
 改动点：
+
 1. `supports_gpu_multi_step` 引入可解释判定（含后端能力、metadata 能力、LoRA/adapter 条件）。
 2. 增加失败原因计数（`fail_backend/fail_prompt/...`）。
 3. 在 multi-step 决策点打印探针：
@@ -109,6 +120,7 @@
    - `fallback CPU prepare because supports_gpu_multi_step=False.`
 
 原理：
+
 - 不是只要“能跑”就够，必须能解释“为什么没跑”。
 - `supports_gpu_multi_step=False + fail_backend=1` 可以直接定位是后端能力侧回退。
 
@@ -119,17 +131,19 @@
 你关心的是两层：
 
 1. Worker 调度/准备阶段（`worker_base.py:464`）
+
    - `prepare_worker_input_ms`
    - `prepare_model_input_ms`
    - `execute_worker_ms`
    - `model_execute_ms`
-
 2. 模型执行内部阶段（`model_runner.py:1433` 附近）
+
    - `forward_ms`
    - `logits_ms`
    - `sampler_ms`
 
 当前代码状态：
+
 - `vllm-ascend/vllm_ascend/worker/model_runner.py` 已有聚合日志：
   - `BaseRunner stage times: avg_forward_ms=... avg_logits_ms=... avg_sampler_ms=... avg_execute_total_ms=...`
 - worker 侧你要的四段字段目前在本轮提取表中仍未出现（第 7 节给证据）。
@@ -138,13 +152,14 @@
 
 ## 4. 命中证据矩阵（按提取日志判定）
 
-| 组别 | scorer 路径 | multi-step 判定 | fallback |
-|---|---|---|---|
-| A (`FP_ON+MQA_ON`) | `Use MQA scorer` | `supports_gpu_multi_step=True` | 无 |
-| B (`FP_ON+MQA_OFF`) | `Use batch expansion` | `supports_gpu_multi_step=True` | 无 |
-| C (`FP_OFF+MQA_ON`) | `Use MQA scorer` | `supports_gpu_multi_step=False` + `fail_backend=1` | 有 |
-| D (`FP_OFF+MQA_OFF`) | `Use batch expansion` | `supports_gpu_multi_step=False` + `fail_backend=1` | 有 |
-| NO_SPEC | 不适用 | 不适用 | 不适用 |
+
+| 组别                 | scorer 路径           | multi-step 判定                                    | fallback |
+| -------------------- | --------------------- | -------------------------------------------------- | -------- |
+| A (`FP_ON+MQA_ON`)   | `Use MQA scorer`      | `supports_gpu_multi_step=True`                     | 无       |
+| B (`FP_ON+MQA_OFF`)  | `Use batch expansion` | `supports_gpu_multi_step=True`                     | 无       |
+| C (`FP_OFF+MQA_ON`)  | `Use MQA scorer`      | `supports_gpu_multi_step=False` + `fail_backend=1` | 有       |
+| D (`FP_OFF+MQA_OFF`) | `Use batch expansion` | `supports_gpu_multi_step=False` + `fail_backend=1` | 有       |
+| NO_SPEC              | 不适用                | 不适用                                             | 不适用   |
 
 说明：`all_log_lines.csv` 中未检索到 `DraftGPUFastPath` 字段；本轮以 `MultiStep probe` 作为 FastPath 命中/回退证据主字段。
 
@@ -154,33 +169,36 @@
 
 ### 5.1 吞吐与时延（summary_combined.csv, status=OK）
 
-| 组别 | k | Throughput (tok/s) | Mean TPOT (ms) | Mean ITL (ms) | mqa_mode | supports_gpu_multi_step |
-|---|---:|---:|---:|---:|---|---|
-| A | 2 | 513.78 | 307.19 | 311.45 | MQA | True |
-| A | 4 | 519.02 | 326.97 | 340.11 | MQA | True |
-| A | 8 | 542.98 | 302.78 | 343.23 | MQA | True |
-| B | 2 | 327.65 | 303.48 | 314.90 | BATCH_EXPANSION | True |
-| B | 4 | 314.75 | 352.96 | 332.24 | BATCH_EXPANSION | True |
-| B | 8 | 328.03 | 316.49 | 319.65 | BATCH_EXPANSION | True |
-| C | 2 | 473.06 | 316.05 | 334.03 | MQA | False |
-| C | 4 | 493.59 | 312.44 | 358.60 | MQA | False |
-| C | 8 | 524.13 | 330.46 | 381.50 | MQA | False |
-| D | 2 | 400.65 | 263.80 | 375.08 | BATCH_EXPANSION | False |
-| D | 4 | 403.54 | 252.10 | 396.68 | BATCH_EXPANSION | False |
-| D | 8 | 374.72 | 259.96 | 452.66 | BATCH_EXPANSION | False |
-| NO_SPEC | 0 | 706.73 | 139.53 | 92.72 | UNKNOWN | - |
+
+| 组别    | k | Throughput (tok/s) | Mean TPOT (ms) | Mean ITL (ms) | mqa_mode        | supports_gpu_multi_step |
+| ------- | -: | -----------------: | -------------: | ------------: | --------------- | ----------------------- |
+| A       | 2 |             513.78 |         307.19 |        311.45 | MQA             | True                    |
+| A       | 4 |             519.02 |         326.97 |        340.11 | MQA             | True                    |
+| A       | 8 |             542.98 |         302.78 |        343.23 | MQA             | True                    |
+| B       | 2 |             327.65 |         303.48 |        314.90 | BATCH_EXPANSION | True                    |
+| B       | 4 |             314.75 |         352.96 |        332.24 | BATCH_EXPANSION | True                    |
+| B       | 8 |             328.03 |         316.49 |        319.65 | BATCH_EXPANSION | True                    |
+| C       | 2 |             473.06 |         316.05 |        334.03 | MQA             | False                   |
+| C       | 4 |             493.59 |         312.44 |        358.60 | MQA             | False                   |
+| C       | 8 |             524.13 |         330.46 |        381.50 | MQA             | False                   |
+| D       | 2 |             400.65 |         263.80 |        375.08 | BATCH_EXPANSION | False                   |
+| D       | 4 |             403.54 |         252.10 |        396.68 | BATCH_EXPANSION | False                   |
+| D       | 8 |             374.72 |         259.96 |        452.66 | BATCH_EXPANSION | False                   |
+| NO_SPEC | 0 |             706.73 |         139.53 |         92.72 | UNKNOWN         | -                       |
 
 注：提取表中 C/D 的 `supports_gpu_multi_step` 原值为 `False.`（带句点），文档中按布尔语义归一化写为 `False`。
 
 ### 5.2 消融增益（以 throughput_tps 计算）
 
+
 | k | A vs B（同 FastPath 比 MQA） | C vs D（同回退比 MQA） | A vs C（同 MQA 比 FastPath） | B vs D（同 BatchExp 比 FastPath） |
-|---:|---:|---:|---:|---:|
-| 2 | +56.81% | +18.07% | +8.61% | -18.22% |
-| 4 | +64.90% | +22.32% | +5.15% | -22.00% |
-| 8 | +65.53% | +39.87% | +3.60% | -12.46% |
+| -: | ---------------------------: | ---------------------: | ---------------------------: | --------------------------------: |
+| 2 |                      +56.81% |                +18.07% |                       +8.61% |                           -18.22% |
+| 4 |                      +64.90% |                +22.32% |                       +5.15% |                           -22.00% |
+| 8 |                      +65.53% |                +39.87% |                       +3.60% |                           -12.46% |
 
 三点结论：
+
 - MQA 在 ON/OFF 两侧都明显提高吞吐（A>B，C>D）。
 - FastPath 在 MQA ON 条件下有稳定正收益（A>C）。
 - 在 BatchExpansion 路径下 FastPath 不一定带来端到端收益（B<D）。
@@ -194,43 +212,48 @@
 
 补充（A_k8 vs no-spec）：
 
-| 指标 | A_k8 | no-spec |
-|---|---:|---:|
-| mean_ttft_ms | 260.16 | 231.40 |
-| p99_ttft_ms | 664.14 | 693.38 |
-| mean_tpot_ms | 302.78 | 139.53 |
-| mean_itl_ms | 343.23 | 92.72 |
-| p99_itl_ms | 2224.19 | 402.16 |
+
+| 指标         |    A_k8 | no-spec |
+| ------------ | ------: | ------: |
+| mean_ttft_ms |  260.16 |  231.40 |
+| p99_ttft_ms  |  664.14 |  693.38 |
+| mean_tpot_ms |  302.78 |  139.53 |
+| mean_itl_ms  |  343.23 |   92.72 |
+| p99_itl_ms   | 2224.19 |  402.16 |
 
 解读：
+
 - spec 的主要差距仍在 token 级时延（TPOT/ITL），尤其尾部 ITL。
 - 这说明除了 scorer/FastPath 命中，调度与额外链路抖动仍是核心差距来源。
 
 ### 5.4 模型执行内部阶段（log_last_values 聚合）
 
-| 组别 | avg_execute_total_ms | avg_forward_ms | avg_logits_ms | avg_sampler_ms |
-|---|---:|---:|---:|---:|
-| A（k=2/4/8均值） | 67.70 | 61.99 | 1.40 | 4.26 |
-| B（k=2/4/8均值） | 67.81 | 63.36 | 1.09 | 3.30 |
-| C（k=2/4/8均值） | 69.57 | 63.63 | 1.49 | 4.41 |
-| D（k=2/4/8均值） | 70.09 | 63.94 | 1.35 | 4.75 |
-| NO_SPEC | 60.40 | 49.99 | 0.63 | 3.24 |
+
+| 组别             | avg_execute_total_ms | avg_forward_ms | avg_logits_ms | avg_sampler_ms |
+| ---------------- | -------------------: | -------------: | ------------: | -------------: |
+| A（k=2/4/8均值） |                67.70 |          61.99 |          1.40 |           4.26 |
+| B（k=2/4/8均值） |                67.81 |          63.36 |          1.09 |           3.30 |
+| C（k=2/4/8均值） |                69.57 |          63.63 |          1.49 |           4.41 |
+| D（k=2/4/8均值） |                70.09 |          63.94 |          1.35 |           4.75 |
+| NO_SPEC          |                60.40 |          49.99 |          0.63 |           3.24 |
 
 ---
 
 ## 6. 你关心的字段：当前是否“在提取数据里”
 
-| 字段 | 你给的位点 | 当前提取结果 | 证据 |
-|---|---|---|---|
-| `prepare_worker_input_ms` | `worker_base.py:464` | 未看到 | `all_log_lines.csv` 无匹配 |
-| `prepare_model_input_ms` | `worker_base.py:464` | 未看到 | 同上 |
-| `execute_worker_ms` | `worker_base.py:464` | 未看到 | 同上 |
-| `model_execute_ms` | `worker_base.py:464` | 未看到 | 同上 |
-| `forward_ms` | `model_runner.py:1433` 附近 | 有（聚合） | `avg_forward_ms` |
-| `logits_ms` | `model_runner.py:1476` 附近 | 有（聚合） | `avg_logits_ms` |
-| `sampler_ms` | `model_runner.py:1501` 附近 | 有（聚合） | `avg_sampler_ms` |
+
+| 字段                      | 你给的位点                  | 当前提取结果 | 证据                       |
+| ------------------------- | --------------------------- | ------------ | -------------------------- |
+| `prepare_worker_input_ms` | `worker_base.py:464`        | 未看到       | `all_log_lines.csv` 无匹配 |
+| `prepare_model_input_ms`  | `worker_base.py:464`        | 未看到       | 同上                       |
+| `execute_worker_ms`       | `worker_base.py:464`        | 未看到       | 同上                       |
+| `model_execute_ms`        | `worker_base.py:464`        | 未看到       | 同上                       |
+| `forward_ms`              | `model_runner.py:1433` 附近 | 有（聚合）   | `avg_forward_ms`           |
+| `logits_ms`               | `model_runner.py:1476` 附近 | 有（聚合）   | `avg_logits_ms`            |
+| `sampler_ms`              | `model_runner.py:1501` 附近 | 有（聚合）   | `avg_sampler_ms`           |
 
 一句话：
+
 - 模型内部三段本轮有数据。
 - Worker 调度/准备四段在这批提取表里仍缺失，需要补日志点并重跑。
 
@@ -285,3 +308,74 @@
 2. 把实验按输入长度分桶（短/中/长）并固定并发，分别统计 P50/P95/P99 ITL，验证尾时延是否主要来自长上下文与调度抖动。
 3. 额外记录 acceptance/waste（如 step_accept、waste_ratio），建立“接受率 -> 吞吐收益”的拟合曲线，确定 spec 的 break-even 区间。
 4. 论文中建议采用“主效应（MQA）+ 次效应（FastPath）+ 交互项（scorer x fastpath）”的消融叙述，避免只给单一平均值结论。
+
+---
+
+## 9. 补丁留痕（2.0）
+
+本节记录本轮“链路开销与尾延迟”三项最小补丁，版本标识为 **2.0**。
+
+### 9.1 Patch 2.0-1：Adaptive-K EWMA 热路径门控（默认关闭）
+
+- 缘由：
+  - 在 `spec_decode` 热路径中，`_update_k_ewma()` 每步都会执行 `step_accept.detach().float().cpu()`，会触发 device->host 拷贝。
+  - 当 utility 模式未启用时，这部分 EWMA 数据并不会参与决策，属于纯额外开销。
+- 目的：
+  - 去掉“默认无收益”的每步 CPU 拷贝，减少 ITL 与尾延迟抖动。
+- 逻辑代码：
+  - 文件：`vllm/vllm/spec_decode/spec_decode_worker.py`
+  - 新增开关：`self._adaptive_ewma_enable = self.adaptive_enable_utility or VLLM_ASCEND_ADAPTIVE_EWMA_ENABLE=1`
+  - 调整调用条件：
+    - 由 `if step_accept.numel() > 0:`
+    - 改为 `if step_accept.numel() > 0 and self._adaptive_ewma_enable:`
+- 语义影响：
+  - 当 utility adaptive-k 打开时，行为不变。
+  - 默认 utility 关闭时，仅移除无用 EWMA 更新，不改变 decode 结果。
+
+### 9.2 Patch 2.0-2：补齐 prefill 同步阶段计时（prefill_sync_time_ms）
+
+- 缘由：
+  - 在 speculative 路径中，`prefill_req` 的 proposer 同步执行不在原有 `proposal/scoring/verification` 三段计时内，导致链路分析漏项。
+- 目的：
+  - 把“prefill 同步到 proposer KV”的额外耗时单独暴露，便于解释 spec 与 no-spec 的尾延迟差距。
+- 逻辑代码：
+  - 文件：`vllm/vllm/spec_decode/spec_decode_worker.py`
+  - 在 `_run_speculative_decoding_step()` 中新增：
+    - `prefill_sync_time_ms = 0.0`
+    - `with Timer() as prefill_sync_timer: self.proposer_worker.execute_model(prefill_req)`
+    - `prefill_sync_time_ms = prefill_sync_timer.elapsed_time_ms`
+  - 扩展 stage times：
+    - 从 `(proposal_per_tok_ms, scoring_ms, verification_ms)`
+    - 改为 `(proposal_per_tok_ms, scoring_ms, verification_ms, prefill_sync_ms)`
+  - 扩展日志字段：
+    - `SpecDecodeWorker stage times: ... prefill_sync_time_ms=...`
+- 语义影响：
+  - 仅增加观测与日志，不改变接受/采样逻辑。
+
+### 9.3 Patch 2.0-3：MQA scorer proposal token 懒加载（避免全量 tolist）
+
+- 缘由：
+  - 原实现先做 `all_proposal_tokens = proposals.proposal_token_ids.tolist()`，会把整批 `B x K` 一次性转 Python list。
+  - 在含大量 `proposal_len=0` 或混合请求时，这一步容易产生不必要 CPU 开销。
+- 目的：
+  - 减少 Python 侧物化数据量，降低 scoring 前后的 host 开销与抖动。
+- 逻辑代码：
+  - 文件：`vllm/vllm/spec_decode/mqa_scorer.py`
+  - 保留：`all_proposal_lengths = proposals.proposal_lens.tolist()`
+  - 修改：
+    - 从“全量 `proposal_token_ids.tolist()`”
+    - 改为“按序列按需切片物化”：
+      - `proposal_len = all_proposal_lengths[i]`
+      - `proposal_token_ids = proposal_token_ids_tensor[i, :proposal_len].tolist()`
+- 语义影响：
+  - 仅数据准备路径优化，不改变 proposal/scoring 的数学结果。
+
+### 9.4 2.0 补丁边界说明
+
+- 本轮 2.0 补丁均为“最小可落地”改动：
+  1. 不改 acceptance 算法。
+  2. 不改模型前向计算图。
+  3. 只优化热路径开销与观测完整性。
+- 建议压测日志检索关键字新增：
+  - `prefill_sync_time_ms`
+  - `_adaptive_ewma_enable`（可通过配置打印或运行配置留痕）
